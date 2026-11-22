@@ -246,7 +246,89 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 .btn-sesion{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 13px;border-radius:19px;border:1px solid rgba(255,197,51,.4);background:rgba(255,255,255,.05);color:var(--oro);font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer}
 .btn-sesion[hidden]{display:none}
 .btn-sesion .ic{width:16px;height:16px}
-@media(max-width:340px){.btn-sesion span{display:none}.btn-sesion{padding:0 11px}}
+/* ===== Barra superior en celular: que nunca se salga de la pantalla ===== */
+.barra-top{gap:8px}
+.marca{min-width:0;flex:0 1 auto;overflow:hidden}
+.marca span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acciones{flex:0 0 auto}
+@media(max-width:560px){
+  .barra-top{padding:8px 12px;gap:6px}
+  .marca{font-size:15px;letter-spacing:1px;gap:8px}
+  .marca img{width:32px;height:32px}
+  .acciones{gap:6px}
+  .btn-sesion{height:36px;padding:0 11px;font-size:11.5px;gap:5px}
+  .btn-sonido{width:36px;height:36px}
+}
+@media(max-width:365px){
+  .btn-sesion{padding:0 9px;font-size:11px}
+  .marca{font-size:13.5px;gap:6px}
+  .marca img{width:30px;height:30px}
+  .punto-pedido{width:8px;height:8px}
+}
+/* ============ PEDIDOS Y SEGUIMIENTO ============ */
+.btn-pedidos{position:relative}
+.btn-pedidos .punto-pedido{position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:var(--vino2);border:2px solid var(--fondo);box-shadow:0 0 8px rgba(255,59,68,.9);animation:pulso 1.6s infinite}
+.caja-pedidos{max-height:88vh}
+.enc-titulo{display:flex;align-items:center;gap:10px;min-width:0}
+.x.volver{display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(255,255,255,.07)}
+.vista[hidden]{display:none!important}
+[hidden]{display:none!important}
+
+.pedido-item{display:flex;align-items:center;gap:12px;width:100%;padding:14px;margin-bottom:10px;border-radius:14px;border:1px solid var(--borde);background:rgba(255,255,255,.03);color:inherit;text-align:left;cursor:pointer;transition:border-color .2s,background .2s,transform .15s}
+.pedido-item:hover{border-color:rgba(255,197,51,.45);background:rgba(255,197,51,.05)}
+.pedido-item:active{transform:scale(.99)}
+.pedido-info{flex:1;min-width:0}
+.pedido-fila{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+.pedido-cod{font-size:12px;font-weight:700;letter-spacing:1px;color:var(--oro)}
+.pedido-det{font-size:12px;line-height:1.45;color:var(--gris);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pedido-pie{margin-top:5px;font-size:12.5px;font-weight:600;color:var(--texto)}
+.pedido-pie span{font-weight:400;color:var(--gris)}
+.flecha{flex-shrink:0;color:var(--gris);font-size:17px}
+
+.et{flex-shrink:0;padding:4px 9px;border-radius:20px;font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;border:1px solid}
+.et.recibido{color:#ffd46b;border-color:rgba(255,197,51,.45);background:rgba(255,197,51,.1)}
+.et.preparando{color:#ffb347;border-color:rgba(255,159,28,.5);background:rgba(255,159,28,.12)}
+.et.armando{color:#ff9a6b;border-color:rgba(255,120,60,.5);background:rgba(255,120,60,.12)}
+.et.camino{color:#8fd0ff;border-color:rgba(80,160,255,.45);background:rgba(80,160,255,.12)}
+.et.entregado{color:#7be0a0;border-color:rgba(46,204,113,.45);background:rgba(46,204,113,.12)}
+.et.cancelado{color:#ff8a8a;border-color:rgba(227,93,93,.45);background:rgba(227,93,93,.12)}
+
+.caja-estado{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;margin-bottom:18px;border-radius:12px;background:rgba(255,197,51,.07);border:1px solid rgba(255,197,51,.2)}
+.caja-estado b{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--texto)}
+.caja-estado small{display:block;margin-top:1px;font-size:11.5px;color:var(--gris)}
+.aviso-cancelado{padding:12px 14px;margin-bottom:18px;border-radius:12px;font-size:13px;line-height:1.5;background:rgba(227,93,93,.1);border:1px solid rgba(227,93,93,.35);color:#ffb3b3}
+
+/* línea de tiempo */
+.linea-tiempo{list-style:none;display:flex;flex-direction:column;gap:16px;margin-bottom:22px}
+.paso-p{position:relative;display:grid;grid-template-columns:40px 1fr;column-gap:13px}
+.riel-p{position:relative;display:flex;justify-content:center;align-items:flex-start}
+.riel-p::after{content:'';position:absolute;left:50%;margin-left:-1.5px;top:40px;height:calc(100% - 16px);width:3px;border-radius:3px;background:#3d3833;transition:background .4s,box-shadow .4s}
+.paso-p.hecho .riel-p::after{background:linear-gradient(180deg,var(--oro),#a9770a);box-shadow:0 0 8px rgba(255,197,51,.45)}
+.paso-p:last-child .riel-p::after{display:none}
+.nodo-p{flex:0 0 auto;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:2;border:2px solid var(--borde);background:#0b0a09;transition:border-color .4s,box-shadow .4s,background .4s}
+.nodo-p svg{width:20px;height:20px;color:var(--oro);filter:drop-shadow(0 0 5px rgba(255,197,51,.55))}
+.paso-p.hecho .nodo-p{border-color:var(--oro);background:radial-gradient(circle at 50% 45%,rgba(255,197,51,.16),#0b0a09 72%);box-shadow:0 0 14px rgba(255,197,51,.45),inset 0 0 12px rgba(255,197,51,.16)}
+.paso-p.activo .nodo-p{border-color:var(--oro);background:radial-gradient(circle at 50% 45%,rgba(255,197,51,.18),#0b0a09 72%);animation:latidoP 2s ease-in-out infinite}
+.paso-p.activo .nodo-p::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(255,197,51,.5);animation:ondaP 2.2s ease-out infinite}
+.punto-p{width:11px;height:11px;border-radius:50%;background:var(--oro);box-shadow:0 0 10px rgba(255,197,51,.9)}
+.tarjeta-p{padding:12px 14px;border-radius:14px;background:linear-gradient(160deg,#181310,#0f0d0b);border:1.5px solid var(--borde);transition:border-color .4s,box-shadow .4s,background .4s}
+.paso-p.hecho .tarjeta-p,.paso-p.activo .tarjeta-p{border-color:rgba(255,197,51,.7);background:linear-gradient(160deg,#1d1711,#120f0c);box-shadow:0 0 18px rgba(255,197,51,.12),inset 0 0 16px rgba(255,197,51,.04)}
+.fila-p{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.tarjeta-p h4{font-family:'Poppins',sans-serif;font-size:14.5px;font-weight:700;line-height:1.25;color:var(--texto)}
+.tarjeta-p .hora-p{flex-shrink:0;font-size:11px;font-weight:600;color:var(--oro);opacity:0;transition:opacity .4s}
+.paso-p.hecho .hora-p,.paso-p.activo .hora-p{opacity:.9}
+.tarjeta-p p{margin-top:3px;font-size:12px;font-style:italic;line-height:1.4;color:var(--gris)}
+.paso-p.pendiente .tarjeta-p h4{opacity:.55}
+.paso-p.pendiente .tarjeta-p p{opacity:.45}
+@keyframes latidoP{0%,100%{box-shadow:0 0 12px rgba(255,197,51,.4),inset 0 0 12px rgba(255,197,51,.14)}50%{box-shadow:0 0 22px rgba(255,197,51,.8),inset 0 0 16px rgba(255,197,51,.24)}}
+@keyframes ondaP{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.55);opacity:0}}
+
+.detalle-pie{border-top:1px dashed rgba(255,255,255,.1);padding-top:14px;font-size:13px;color:var(--gris)}
+.detalle-pie div{display:flex;justify-content:space-between;gap:12px;padding:4px 0}
+.detalle-pie .tot{margin-top:6px;padding-top:10px;border-top:1px solid var(--borde);font-size:15px;font-weight:700;color:var(--oro)}
+.btn-wa-mini{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;padding:12px;border-radius:12px;background:linear-gradient(120deg,#1ebd59,#25D366);color:#06210f;text-decoration:none;font-weight:600;font-size:13.5px}
+.btn-wa-mini .ic{width:17px;height:17px}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.tarjeta{opacity:1;transform:none}#intro h2,.puntos,.btn-iniciar{opacity:1}}
 </style>
 </head>
@@ -262,7 +344,7 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 
 <div class="barra-top">
   <div class="marca"><img data-img="logo" alt="KIRY'FOOD"><span>KIRY'FOOD</span></div>
-  <div class="acciones"><button id="btnSesion" class="btn-sesion" type="button" hidden></button><button id="btnSonido" class="btn-sonido" title="Silenciar / Activar sonido"></button></div>
+  <div class="acciones"><button id="btnPedidos" class="btn-sesion btn-pedidos" type="button" hidden><span class="punto-pedido" aria-hidden="true"></span><span>Pedidos</span></button><button id="btnSesion" class="btn-sesion" type="button" hidden></button><button id="btnSonido" class="btn-sonido" title="Silenciar / Activar sonido"></button></div>
 </div>
 
 <header class="hero">
@@ -334,6 +416,37 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
       <div class="nota-dom">* El total incluye <span id="mcNotaDomicilio">$2.000</span> de domicilio</div>
       <div class="resumen"><span>Total del pedido</span><span id="mcTotal">$0</span></div>
       <button class="btn-verde" id="mcEnviar"><span data-icono="wa"></span> Pedir por WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalPedidos" class="modal">
+  <div class="caja caja-pedidos">
+    <div class="manija"></div>
+    <div class="enc">
+      <div class="enc-titulo">
+        <button class="x volver" id="pdVolver" type="button" aria-label="Volver" hidden>←</button>
+        <div>
+          <div class="enc-nombre" id="pdTitulo">Mis pedidos</div>
+          <div id="pdSub" style="margin-top:3px;font-size:12px;font-weight:400;color:var(--gris)">Aquí ves cómo avanza tu pedido</div>
+        </div>
+      </div>
+      <button class="x" id="pdCerrar" type="button" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="vista" id="pdLista">
+      <div id="pdItems"></div>
+      <div id="pdVacio" class="nota" style="text-align:center;padding:16px 0 22px" hidden>
+        Todavía no tienes pedidos.<br>Cuando pidas, aquí podrás ver cómo avanza.
+      </div>
+    </div>
+
+    <div class="vista" id="pdDetalle" hidden>
+      <div class="caja-estado" id="pdEstado"></div>
+      <div id="pdAviso"></div>
+      <ol class="linea-tiempo" id="pdLinea"></ol>
+      <div class="detalle-pie" id="pdPie"></div>
+      <a class="btn-wa-mini" id="pdWa" href="https://wa.me/573016851905" target="_blank" rel="noopener"><span data-icono="wa"></span> Escribir al negocio</a>
     </div>
   </div>
 </div>
@@ -424,6 +537,7 @@ const ICONOS = {
 };
 ICONOS.salir = _svg('<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>', _st);
 ICONOS.entrar = _svg('<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/>', _st);
+ICONOS.check = _svg('<path d="M5 12.5l4.5 4.5L19 7"/>', 'fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"');
 document.querySelectorAll('[data-icono]').forEach(el => { el.innerHTML = ICONOS[el.dataset.icono]; });
 document.getElementById('datoDomicilio').textContent = formatearCOP(COSTO_DOMICILIO);
 
@@ -799,22 +913,42 @@ $('mcEnviar').addEventListener('click', () => {
   if (hayError) { (!nombreCliente ? $('mcNombreCliente') : $('mcDireccion')).focus(); return; }
   const subtotal = subtotalCarrito();
   const total = subtotal + COSTO_DOMICILIO;
+  const telefono = (perfil && perfil.tel) || '';
+  const codigo = nuevoCodigo();
+  const items = carrito.map(i => ({ nombre:i.nombre, precio:i.precio, cantidad:i.cantidad, sin:[...i.ingredientesExcluidos] }));
   let mensaje = `Datos para tu pedido:\n\nNombre completo: ${nombreCliente}\nDirección de entrega: ${direccion}`;
   if (referencia) mensaje += `\nPunto de referencia: ${referencia}`;
-  if (perfil && perfil.tel) mensaje += `\nCelular: ${perfil.tel}`;
+  if (telefono) mensaje += `\nCelular: ${telefono}`;
   mensaje += `\n\nHola, quiero pedir:`;
   carrito.forEach(item => {
     mensaje += `\n${item.cantidad}x ${item.nombre} (${formatearCOP(item.precio)} c/u)`;
     if (item.ingredientesExcluidos.length) mensaje += ` — Sin: ${item.ingredientesExcluidos.join(', ')}`;
   });
   mensaje += `\n\nSubtotal: ${formatearCOP(subtotal)}\nDomicilio: ${formatearCOP(COSTO_DOMICILIO)}\nTotal a pagar: ${formatearCOP(total)}`;
+  mensaje += `\n\nCódigo de tu pedido: #${codigo}`;
+  /* 1) WhatsApp primero: así el navegador no bloquea la ventana por el retraso */
   window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank');
+  /* 2) Se guarda el pedido para el seguimiento en vivo */
   carrito = [];
   $('mcNombreCliente').value = '';
   $('mcDireccion').value = '';
   $('mcReferencia').value = '';
   actualizarBarraCarrito();
   cerrarModalCarrito();
+  abrirPedido(codigo);
+  guardarPedido(codigo, {
+    uid: (window.KiryAuth && KiryAuth.usuario) ? KiryAuth.usuario.uid : null,
+    nombre: nombreCliente,
+    tel: telefono,
+    direccion,
+    referencia,
+    items,
+    subtotal,
+    domicilio: COSTO_DOMICILIO,
+    total,
+    estado: 'recibido',
+    fechas: { recibido: new Date().toISOString() }
+  }).then(ok => { if (ok) escucharPedido(codigo); });
 });
 
 /* Cuenta con Firebase: registro, ingreso y cierre de sesión */
@@ -908,7 +1042,7 @@ function pintarSesion() {
   const b = $('btnSesion');
   if (!window.KiryAuth) { b.hidden = true; return; }
   b.hidden = false;
-  b.innerHTML = KiryAuth.usuario ? ICONOS.salir + '<span>Cerrar sesión</span>' : ICONOS.entrar + '<span>Ingresar</span>';
+  b.innerHTML = KiryAuth.usuario ? ICONOS.salir + '<span>Salir</span>' : ICONOS.entrar + '<span>Ingresar</span>';
 }
 async function mostrarRegistro() {
   if (!window.KiryAuth) return;
@@ -994,26 +1128,262 @@ $('rgOlvido').addEventListener('click', async () => {
   catch (err) { if (err && err.code && err.code !== 'auth/user-not-found') { rgFalla(rgLogin, rgErrL, msgError(err)); return; } }
   rgMsg(rgErrL, 'Si el correo está registrado, te enviamos un enlace para restablecer la contraseña.', true);
 });
+
+/* ============================================================
+   PEDIDOS: guardar, listar y seguir en vivo
+   ============================================================ */
+const ESTADOS_PEDIDO = [
+  { id:'recibido',   titulo:'Pedido Recibido',       texto:'Hemos recibido tu pedido correctamente.' },
+  { id:'preparando', titulo:'En Preparación',        texto:'Estamos preparando tus ingredientes.' },
+  { id:'armando',    titulo:'Armando tu Salchipapa', texto:'Estamos armando tu pedido con mucho cuidado.' },
+  { id:'camino',     titulo:'En Camino',             texto:'¡Tu pedido salió! Pronto estará contigo.' },
+  { id:'entregado',  titulo:'Pedido Entregado',      texto:'¡Disfruta tu salchipapa!' }
+];
+const ETIQUETA_PEDIDO = { recibido:'Recibido', preparando:'Preparando', armando:'Armando', camino:'En camino', entregado:'Entregado', cancelado:'Cancelado' };
+const CLAVE_PEDIDOS = 'kiry_pedidos';
+
+let pedidosCache = [];
+let cancelarVigia = null;
+let soltarDetalle = null;
+let relojDetalle = null;
+let relojCarga = null;
+
+const esUsuario = () => !!(window.KiryAuth && KiryAuth.usuario);
+const modalPedidosAbierto = () => $('modalPedidos').classList.contains('abierto');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+
+function nuevoCodigo() {
+  const abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s = '';
+  for (let i = 0; i < 6; i++) s += abc[Math.floor(Math.random() * abc.length)];
+  return s;
+}
+const leerCodigos = () => { try { return JSON.parse(localStorage.getItem(CLAVE_PEDIDOS) || '[]'); } catch (e) { return []; } };
+function guardarCodigo(c) {
+  const cs = leerCodigos().filter(x => x !== c);
+  cs.unshift(c);
+  try { localStorage.setItem(CLAVE_PEDIDOS, JSON.stringify(cs.slice(0, 20))); } catch (e) {}
+}
+const aFecha = v => {
+  if (!v) return null;
+  if (typeof v.toDate === 'function') return v.toDate();
+  if (typeof v.seconds === 'number') return new Date(v.seconds * 1000);
+  if (typeof v === 'string' || typeof v === 'number') return new Date(v);
+  return null;
+};
+const horaCorta = d => d ? d.toLocaleTimeString('es-CO', { hour:'numeric', minute:'2-digit', hour12:true }) : '';
+function haceCuanto(d) {
+  if (!d) return '';
+  const m = Math.floor((Date.now() - d.getTime()) / 60000);
+  if (m < 1) return 'ahora mismo';
+  if (m < 60) return `hace ${m} min`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `hace ${h} h`;
+  return d.toLocaleDateString('es-CO', { day:'2-digit', month:'short' });
+}
+
+function refrescarBotonPedidos() {
+  const b = $('btnPedidos');
+  if (!b) return;
+  b.hidden = !(esUsuario() || leerCodigos().length > 0);
+}
+function actualizarPunto() {
+  const punto = document.querySelector('#btnPedidos .punto-pedido');
+  if (!punto) return;
+  const activo = pedidosCache.some(p => p.estado && p.estado !== 'entregado' && p.estado !== 'cancelado');
+  punto.style.display = activo ? '' : 'none';
+}
+function iniciarVigia() {
+  if (cancelarVigia) { cancelarVigia(); cancelarVigia = null; }
+  pedidosCache = [];
+  refrescarBotonPedidos();
+  actualizarPunto();
+  if (!window.KiryPedidos) return;
+  if (esUsuario()) {
+    cancelarVigia = KiryPedidos.misPedidos(lista => {
+      pedidosCache = lista;
+      actualizarPunto();
+      if (modalPedidosAbierto()) pintarLista();
+    });
+  } else {
+    cargarInvitado();
+  }
+}
+async function cargarInvitado() {
+  const cods = leerCodigos();
+  if (!cods.length || !window.KiryPedidos) { pedidosCache = []; if (modalPedidosAbierto()) pintarLista(); return; }
+  try { pedidosCache = await KiryPedidos.obtenerVarios(cods); }
+  catch (e) { console.warn('No se pudieron leer los pedidos', e); }
+  actualizarPunto();
+  if (modalPedidosAbierto()) pintarLista();
+}
+async function guardarPedido(codigo, datos) {
+  if (!window.KiryPedidos) return false;
+  try {
+    await KiryPedidos.crear(codigo, datos);
+    guardarCodigo(codigo);
+    refrescarBotonPedidos();
+    return true;
+  } catch (e) {
+    console.warn('No se pudo guardar el pedido', e);
+    return false;
+  }
+}
+
+function abrirMisPedidos() {
+  $('modalPedidos').classList.add('abierto');
+  document.body.style.overflow = 'hidden';
+  mostrarLista();
+  if (!esUsuario()) cargarInvitado();
+}
+function cerrarPedidos() {
+  $('modalPedidos').classList.remove('abierto');
+  document.body.style.overflow = 'auto';
+  detenerDetalle();
+}
+function detenerDetalle() {
+  if (soltarDetalle) { soltarDetalle(); soltarDetalle = null; }
+  if (relojDetalle) { clearInterval(relojDetalle); relojDetalle = null; }
+  if (relojCarga) { clearTimeout(relojCarga); relojCarga = null; }
+}
+function mostrarLista() {
+  detenerDetalle();
+  $('pdLista').hidden = false;
+  $('pdDetalle').hidden = true;
+  $('pdVolver').hidden = true;
+  $('pdTitulo').textContent = 'Mis pedidos';
+  $('pdSub').textContent = 'Aquí ves cómo avanza tu pedido';
+  pintarLista();
+}
+function pintarLista() {
+  const cont = $('pdItems');
+  if (!cont) return;
+  const orden = [...pedidosCache].sort((a, b) => {
+    const fa = aFecha(a.creado), fb = aFecha(b.creado);
+    return (fb ? fb.getTime() : 0) - (fa ? fa.getTime() : 0);
+  });
+  const activos = orden.filter(p => p.estado !== 'entregado' && p.estado !== 'cancelado');
+  const resto = orden.filter(p => p.estado === 'entregado' || p.estado === 'cancelado');
+  const lista = [...activos, ...resto];
+  cont.innerHTML = lista.map(p => {
+    const cod = p.codigo || p.id;
+    const det = (p.items || []).map(i => `${i.cantidad}× ${esc(i.nombre)}`).join(' · ');
+    return `<button type="button" class="pedido-item" data-cod="${esc(cod)}">
+      <div class="pedido-info">
+        <div class="pedido-fila">
+          <span class="pedido-cod">#${esc(cod)}</span>
+          <span class="et ${esc(p.estado)}">${esc(ETIQUETA_PEDIDO[p.estado] || p.estado)}</span>
+        </div>
+        <div class="pedido-det">${det}</div>
+        <div class="pedido-pie">${formatearCOP(p.total || 0)} <span>· ${haceCuanto(aFecha(p.creado))}</span></div>
+      </div>
+      <span class="flecha">›</span>
+    </button>`;
+  }).join('');
+  $('pdVacio').hidden = lista.length > 0;
+}
+function abrirPedido(codigo) {
+  $('modalPedidos').classList.add('abierto');
+  document.body.style.overflow = 'hidden';
+  $('pdLista').hidden = true;
+  $('pdDetalle').hidden = false;
+  $('pdVolver').hidden = false;
+  $('pdTitulo').textContent = 'Seguimiento';
+  $('pdSub').textContent = '#' + codigo;
+  $('pdEstado').innerHTML = '';
+  $('pdAviso').innerHTML = '';
+  $('pdPie').innerHTML = '';
+  $('pdLinea').innerHTML = '<div class="nota" style="text-align:center;padding:24px 0">Cargando tu pedido…</div>';
+  escucharPedido(codigo);
+}
+function escucharPedido(codigo) {
+  detenerDetalle();
+  if (!window.KiryPedidos) {
+    $('pdLinea').innerHTML = '<div class="nota" style="text-align:center;padding:24px 0">El seguimiento no está disponible en este momento.</div>';
+    return;
+  }
+  relojCarga = setTimeout(() => {
+    $('pdLinea').innerHTML = '<div class="nota" style="text-align:center;padding:24px 0">No pudimos cargar el pedido. Revisa tu conexión.</div>';
+  }, 12000);
+  if (esUsuario()) {
+    soltarDetalle = KiryPedidos.escuchar(codigo, p => pintarDetalle(p), () => {});
+  } else {
+    const leer = async () => {
+      try { const p = await KiryPedidos.obtener(codigo); if (p) pintarDetalle(p); }
+      catch (e) { console.warn(e); }
+    };
+    leer();
+    relojDetalle = setInterval(leer, 8000);
+  }
+}
+function pintarDetalle(p) {
+  if (!p) return;
+  if (relojCarga) { clearTimeout(relojCarga); relojCarga = null; }
+  const cancelado = p.estado === 'cancelado';
+  const idx = ESTADOS_PEDIDO.findIndex(e => e.id === p.estado);
+  const actual = idx < 0 ? 0 : idx;
+  const entregado = p.estado === 'entregado';
+  const ultima = aFecha((p.fechas && p.fechas[p.estado]) || p.actualizado || p.creado);
+
+  $('pdEstado').innerHTML = cancelado
+    ? '<div><b>Pedido cancelado</b><small>Escríbenos por WhatsApp si tienes dudas.</small></div>'
+    : `<div><b>${esc(ESTADOS_PEDIDO[actual].titulo)}</b><small>${entregado ? '¡Buen provecho!' : 'Se actualiza solo · ' + haceCuanto(ultima)}</small></div>`;
+
+  $('pdAviso').innerHTML = cancelado
+    ? '<div class="aviso-cancelado">Este pedido fue cancelado. Si crees que es un error, escríbenos.</div>'
+    : '';
+
+  $('pdLinea').innerHTML = ESTADOS_PEDIDO.map((e, i) => {
+    let clase = 'pendiente';
+    if (cancelado) clase = i <= actual ? 'hecho' : 'pendiente';
+    else if (i < actual || (entregado && i === actual)) clase = 'hecho';
+    else if (i === actual) clase = 'activo';
+    const marca = clase === 'hecho' ? ICONOS.check : (clase === 'activo' ? '<div class="punto-p"></div>' : '');
+    const f = aFecha(p.fechas && p.fechas[e.id]) || (e.id === 'recibido' ? aFecha(p.creado) : null);
+    return `<li class="paso-p ${clase}">
+      <div class="riel-p"><div class="nodo-p">${marca}</div></div>
+      <div class="tarjeta-p">
+        <div class="fila-p"><h4>${e.titulo}</h4><span class="hora-p">${horaCorta(f)}</span></div>
+        <p>${e.texto}</p>
+      </div>
+    </li>`;
+  }).join('');
+
+  const filas = (p.items || []).map(i => {
+    const sin = (i.sin && i.sin.length) ? ` <em style="font-style:italic;opacity:.7">(sin ${esc(i.sin.join(', '))})</em>` : '';
+    return `<div><span>${i.cantidad}× ${esc(i.nombre)}${sin}</span><span>${formatearCOP(i.precio * i.cantidad)}</span></div>`;
+  }).join('');
+  $('pdPie').innerHTML = `
+    ${filas}
+    <div><span>Domicilio</span><span>${formatearCOP(p.domicilio || 0)}</span></div>
+    <div class="tot"><span>Total</span><span>${formatearCOP(p.total || 0)}</span></div>
+    <div style="margin-top:10px;font-size:12px;opacity:.8">Entregar en: ${esc(p.direccion || '')}${p.referencia ? ' · ' + esc(p.referencia) : ''}</div>`;
+}
+
+$('btnPedidos').addEventListener('click', abrirMisPedidos);
+$('pdCerrar').addEventListener('click', cerrarPedidos);
+$('pdVolver').addEventListener('click', mostrarLista);
+$('modalPedidos').addEventListener('click', e => { if (e.target === $('modalPedidos')) cerrarPedidos(); });
+$('pdItems').addEventListener('click', e => {
+  const b = e.target.closest('.pedido-item');
+  if (b) abrirPedido(b.dataset.cod);
+});
+window.addEventListener('kiry-sesion', () => { refrescarBotonPedidos(); iniciarVigia(); });
+refrescarBotonPedidos();
 </script>
+<script src="firebase-config.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection, query, where, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 /* ============================================================
    CONFIGURACIÓN DE FIREBASE
-   Pega aquí los datos que te da Firebase (Configuración del
-   proyecto > Tus apps > Configuración del SDK). Mientras diga
-   "PEGA_AQUI", la página funciona normal pero sin cuentas.
+   Los datos viven en un solo lugar: el archivo firebase-config.js
+   (se carga arriba, antes de este bloque). Así, si algún día
+   cambiamos de proyecto, solo se toca ese archivo.
    ============================================================ */
-const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDdDbygx6-GpuU_mSW8kecBGWvBJrAiNXg",
-  authDomain: "negocio-66f9b.firebaseapp.com",
-  projectId: "negocio-66f9b",
-  storageBucket: "negocio-66f9b.firebasestorage.app",
-  messagingSenderId: "185848838523",
-  appId: "1:185848838523:web:af39bba954cad86698a5de"
-};
+const FIREBASE_CONFIG = window.FIREBASE_CONFIG || { apiKey: "PEGA_AQUI" };
 
 if (!FIREBASE_CONFIG.apiKey.startsWith("PEGA")) {
   try {
@@ -1065,6 +1435,42 @@ if (!FIREBASE_CONFIG.apiKey.startsWith("PEGA")) {
       },
       salir() { return signOut(auth); },
       recuperar(correo) { return sendPasswordResetEmail(auth, correo); }
+    };
+
+    /* ------- Pedidos: guardar y escuchar en vivo ------- */
+    async function leerPedido(codigo) {
+      const snap = await getDoc(doc(db, "pedidos", codigo));
+      return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+    }
+    window.KiryPedidos = {
+      async crear(codigo, datos) {
+        await setDoc(doc(db, "pedidos", codigo), {
+          ...datos,
+          codigo,
+          creado: serverTimestamp(),
+          actualizado: serverTimestamp()
+        });
+      },
+      misPedidos(cb) {
+        if (!estado.usuario) return () => {};
+        const q = query(collection(db, "pedidos"), where("uid", "==", estado.usuario.uid), limit(30));
+        return onSnapshot(q, snap => {
+          cb(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+        }, err => console.warn("No se pudieron leer los pedidos", err));
+      },
+      escuchar(codigo, cb) {
+        return onSnapshot(doc(db, "pedidos", codigo), snap => {
+          if (snap.exists()) cb({ id: snap.id, ...snap.data() });
+        }, err => console.warn("No se pudo seguir el pedido", err));
+      },
+      obtener: leerPedido,
+      async obtenerVarios(codigos) {
+        const lista = [];
+        for (const c of codigos.slice(0, 20)) {
+          try { const p = await leerPedido(c); if (p) lista.push(p); } catch (e) {}
+        }
+        return lista;
+      }
     };
   } catch (e) { console.error("Firebase no se pudo iniciar", e); }
 }
