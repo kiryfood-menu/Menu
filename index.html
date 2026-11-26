@@ -466,9 +466,9 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 .aj-btn{flex:1;height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--borde);background:rgba(255,255,255,.05);color:var(--texto);font-size:13.5px;font-weight:600;cursor:pointer;transition:transform .2s,filter .2s}
 .aj-btn:active{transform:scale(.985)}
 .aj-btn:disabled{opacity:.65;cursor:wait}
-.aj-btn.oro{border-color:transparent;background:linear-gradient(120deg,#ffd45c,#ffc533 55%,#e0a300);color:#1a1305;box-shadow:0 6px 16px rgba(255,197,51,.22)}
+.aj-btn.principal{border-color:transparent;background:linear-gradient(120deg,#ffd45c,#ffc533 55%,#e0a300);color:#1a1305;-webkit-text-fill-color:#1a1305;box-shadow:0 6px 16px rgba(255,197,51,.22)}
 #modalAjustes .aj-acciones .btn-sesion{height:44px;margin:0;padding:0 12px;border-radius:12px;font-size:13.5px}
-#modalAjustes .btn-sesion.oro{border-color:transparent;background:linear-gradient(120deg,#ffd45c,#ffc533 55%,#e0a300);color:#1a1305;box-shadow:0 6px 16px rgba(255,197,51,.22)}
+#modalAjustes .btn-sesion.principal{border-color:transparent;background:linear-gradient(120deg,#ffd45c,#ffc533 55%,#e0a300);color:#1a1305;-webkit-text-fill-color:#1a1305;box-shadow:0 6px 16px rgba(255,197,51,.22)}
 .aj-form{margin-top:4px}
 .aj-form[hidden]{display:none}
 .aj-form-tit{margin-bottom:14px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--oro)}
@@ -559,7 +559,7 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
         <div class="aj-dato"><span>Dirección</span><b id="ajDatoDir">—</b></div>
       </div>
       <div class="aj-acciones apilada">
-        <button type="button" class="aj-btn oro" id="btnEditarPerfil" hidden>Editar mis datos</button>
+        <button type="button" class="aj-btn principal" id="btnEditarPerfil" hidden>Editar mis datos</button>
         <button id="btnSesion" class="btn-sesion" type="button" hidden></button>
       </div>
     </div>
@@ -572,7 +572,7 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
       <div class="campo"><label for="ajCorreo">Correo</label><input type="email" id="ajCorreo" disabled></div>
       <p class="aj-msg" id="ajMsgPerfil" role="status"></p>
       <div class="aj-acciones">
-        <button type="submit" class="aj-btn oro" id="ajGuardar">Guardar</button>
+        <button type="submit" class="aj-btn principal" id="ajGuardar">Guardar</button>
         <button type="button" class="aj-btn" id="ajCancelar">Cancelar</button>
       </div>
       <button type="button" class="aj-link" id="ajCambiarClave">Cambiar mi contraseña</button>
@@ -1600,7 +1600,7 @@ function pintarSesion() {
   }
   $('btnEditarPerfil').hidden = !logueado;
   b.hidden = false;
-  b.classList.toggle('oro', !logueado);
+  b.classList.toggle('principal', !logueado);
   b.innerHTML = logueado
     ? ICONOS.salir + '<span>Cerrar sesión</span>'
     : ICONOS.entrar + '<span>Ya tengo cuenta · Ingresar</span>';
