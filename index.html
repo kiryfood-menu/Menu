@@ -157,6 +157,9 @@ button{font:inherit}
 .resumen span:first-child{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--texto)}
 .resumen span:last-child{font-size:19px;font-weight:700;color:var(--oro)}
 .btn-verde{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border:0;border-radius:12px;background:linear-gradient(120deg,#1ebd59,#25D366);color:#06210f;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 8px 20px rgba(37,211,102,.3)}
+.btn-pedir{background:linear-gradient(120deg,#ffd45c,#ffc533 55%,#e0a300);color:#1a1305;box-shadow:0 8px 22px rgba(255,197,51,.28)}
+.btn-pedir:active{transform:scale(.99)}
+.btn-pedir:disabled{opacity:.7;cursor:wait;transform:none}
 .item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--borde)}
 .item-nombre{font-size:15px;font-weight:600;color:var(--texto)}
 .item-det{margin-top:3px;font-size:12px}
@@ -166,6 +169,43 @@ button{font:inherit}
 .titulo-datos{margin:18px 0;text-align:center;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--oro)}
 .nota-dom{margin-bottom:14px;text-align:center;font-size:15px;font-weight:500;color:var(--texto)}
 .nota-dom span{color:var(--oro);font-weight:700}
+/* Forma de pago */
+.pago-titulo{margin-bottom:10px;text-align:center;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--texto)}
+.pago-opciones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.pago-opcion{display:flex;flex-direction:column;align-items:center;gap:3px;padding:13px 8px;border-radius:14px;border:1px solid var(--borde);background:rgba(255,255,255,.04);color:var(--gris);font-size:14px;font-weight:600;cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .2s}
+.pago-opcion:active{transform:scale(.98)}
+.pago-opcion .pago-ico{display:flex;align-items:center;justify-content:center;height:26px;color:var(--oro)}
+.pago-opcion .pago-ico > svg{width:24px;height:24px}
+.pago-opcion small{font-size:11px;font-weight:400;opacity:.85}
+.pago-opcion.activa{border-color:var(--oro);background:rgba(255,197,51,.12);color:var(--texto);box-shadow:inset 0 0 0 1px rgba(255,197,51,.35)}
+.pago-opciones.pago-error{border-radius:14px;box-shadow:0 0 0 1px var(--error)}
+.pago-nota{margin:0 0 16px;text-align:center;font-size:12.5px;line-height:1.45;color:var(--gris)}
+.pago-nota b{color:var(--oro);font-weight:700}
+/* Iconos de pago (sin emojis) */
+.ico-pago,.pago-badge svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ico-pago{width:22px;height:22px;color:var(--oro);opacity:.85;flex-shrink:0}
+.pago-opcion.activa .ico-pago{opacity:1}
+.pago-opcion small{white-space:nowrap}
+/* Logo Nequi (oficial) sobre chip blanco + animacion */
+.nequi-chip{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:3px 7px;border-radius:7px;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.16),0 0 12px rgba(218,0,129,.25);animation:nq-glow 2.6s ease-in-out infinite}
+.nq-logo{display:block;width:44px;height:14px}
+.pago-opcion .nequi-chip{padding:2px 6px}
+.pago-opcion .nq-logo{width:40px;height:13px}
+.nq-dot{transform-box:fill-box;transform-origin:center;animation:nq-latido 2.6s ease-in-out infinite}
+@keyframes nq-latido{0%,58%,100%{transform:scale(1)}70%{transform:scale(1.55)}82%{transform:scale(.9)}}
+@keyframes nq-glow{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.16),0 0 10px rgba(218,0,129,.2)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.22),0 0 20px rgba(218,0,129,.5)}}
+.pago-nota .ico-linea{margin-right:3px}
+.ico-linea{display:inline-block;width:15px;height:15px;vertical-align:-2px;color:var(--oro)}
+/* Aviso de pago en el seguimiento */
+.pago-aviso{display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding:15px 16px;border-radius:14px;border:1px solid rgba(255,197,51,.45);background:linear-gradient(135deg,rgba(255,197,51,.14),rgba(255,197,51,.05))}
+.pago-aviso .pago-icono{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0;border-radius:50%;background:rgba(255,197,51,.14);border:1px solid rgba(255,197,51,.45);color:var(--oro)}
+.pago-aviso .pago-icono svg{width:21px;height:21px}
+.pago-aviso b{display:block;font-size:15px;line-height:1.35;color:var(--texto)}
+.pago-aviso small{display:block;margin-top:5px;font-size:12.5px;line-height:1.45;color:var(--gris)}
+.pago-nequi{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:10px;padding:8px 12px;border-radius:10px;border:1px dashed rgba(255,197,51,.5);background:rgba(0,0,0,.25);color:var(--texto);font-size:13px;cursor:pointer;text-align:left}
+.pago-nequi .pago-nequi-txt{opacity:.85}
+.pago-nequi strong{font-size:15px;letter-spacing:.5px;color:var(--oro)}
+.pago-nequi em{font-style:normal;font-size:11px;color:var(--gris)}
 
 .ic{width:1.2em;height:1.2em;flex-shrink:0}
 [data-icono]{display:inline-flex}
@@ -330,6 +370,49 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 .btn-wa-mini .ic{width:17px;height:17px}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.tarjeta{opacity:1;transform:none}#intro h2,.puntos,.btn-iniciar{opacity:1}}
+
+/* Resultado al confirmar pedido */
+.rp{position:fixed;inset:0;z-index:9800;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.rp.abierto{opacity:1;visibility:visible}
+.rp-caja{width:min(300px,100%);padding:30px 22px 26px;text-align:center;background:linear-gradient(165deg,#171212,#0e0b0b);border:1px solid rgba(255,197,51,.3);border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:scale(.9);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.rp.abierto .rp-caja{transform:none}
+.rp-icono{position:relative;width:104px;height:104px;margin:0 auto 18px}
+.rp-icono svg{width:100%;height:100%;overflow:visible}
+.rp svg circle,.rp svg path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rp-pista{stroke:rgba(255,255,255,.08);stroke-width:6}
+.rp-aro{stroke:var(--oro);stroke-width:6;stroke-dasharray:276;stroke-dashoffset:276;transform-origin:50px 50px}
+.rp-chulo,.rp-x1,.rp-x2{stroke-width:8;opacity:0}
+.rp-chulo{stroke:var(--ok);stroke-dasharray:64;stroke-dashoffset:64}
+.rp-x1,.rp-x2{stroke:var(--vino2);stroke-dasharray:46;stroke-dashoffset:46}
+.rp-centro{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0}
+.rp-icono .rp-centro svg{width:38px;height:38px;overflow:visible}
+.rp-icono .rp-centro svg path{stroke:var(--oro);stroke-width:1.6}
+.rp-titulo{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--texto)}
+.rp-detalle{margin-top:8px;font-size:13px;font-weight:300;line-height:1.5;color:var(--gris)}
+.rp-cargando .rp-aro{stroke-dasharray:70 207;stroke-dashoffset:0;animation:rpGira .9s linear infinite}
+.rp-cargando .rp-centro{opacity:1;animation:rpLate .9s ease-in-out infinite}
+@keyframes rpGira{to{transform:rotate(360deg)}}
+@keyframes rpLate{50%{scale:1.08}}
+.rp-ok .rp-aro,.rp-error .rp-aro{transform:rotate(-90deg);animation:rpTrazo .55s ease forwards}
+.rp-ok .rp-aro{stroke:var(--ok);filter:drop-shadow(0 0 8px rgba(46,204,113,.7))}
+.rp-error .rp-aro{stroke:var(--vino2);filter:drop-shadow(0 0 8px rgba(255,59,68,.7))}
+.rp-ok .rp-chulo{opacity:1;animation:rpTrazo .4s ease .45s forwards}
+.rp-error .rp-x1{opacity:1;animation:rpTrazo .3s ease .4s forwards}
+.rp-error .rp-x2{opacity:1;animation:rpTrazo .3s ease .55s forwards}
+@keyframes rpTrazo{to{stroke-dashoffset:0}}
+.rp-ok .rp-icono::before,.rp-error .rp-icono::before{content:"";position:absolute;inset:6px;border-radius:50%;animation:rpFondo .5s ease .45s both}
+.rp-ok .rp-icono::before{background:rgba(46,204,113,.14)}
+.rp-error .rp-icono::before{background:rgba(255,59,68,.14)}
+@keyframes rpFondo{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+.rp-ok .rp-icono{animation:rpPop .6s cubic-bezier(.2,1.5,.4,1) .35s}
+@keyframes rpPop{50%{scale:1.14}}
+.rp-ok .rp-titulo{color:var(--ok)}
+.rp-error .rp-titulo{color:var(--vino2)}
+.rp-error .rp-caja{animation:rpSacudir .5s ease .4s}
+@keyframes rpSacudir{0%,100%{translate:0 0}20%{translate:-9px 0}40%{translate:9px 0}60%{translate:-6px 0}80%{translate:4px 0}}
+.rp-chispa{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;opacity:0;animation:rpChispa .8s ease-out .5s forwards}
+@keyframes rpChispa{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)}}
+@media(prefers-reduced-motion:reduce){.rp-chispa{display:none}}
 </style>
 </head>
 <body>
@@ -350,11 +433,11 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 <header class="hero">
   <img data-img="logo" class="hero-logo" alt="KIRY'FOOD">
   <h1>Sabor casero<em>estilo callejero</em></h1>
-  <p>Salchipapas con todo, preparadas al momento. Elige tu tamaño favorito y pídelo directo por WhatsApp.</p>
+  <p>Salchipapas con todo, preparadas al momento. Elige tu tamaño favorito y pídelo aquí mismo, sin salir de la página.</p>
   <div class="estado"><span class="punto" id="puntoEstado"></span><span id="textoEstado">Consultando horario…</span></div>
   <a href="#menu" class="cta">Ver el menú</a>
   <div class="datos">
-    <div><b>WhatsApp</b>Pide fácil</div>
+    <div><b>Pago</b>Al recibir</div>
     <div><b id="datoDomicilio">$2.000</b>Domicilio</div>
     <div><b>6 – 11 pm</b>Sáb y dom</div>
   </div>
@@ -370,7 +453,7 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
   <h2>¿Listo <em>para pedir?</em></h2>
   <div class="horario"><b>Solo fines de semana:</b> 6:00 pm – 11:00 pm</div>
   <a class="btn-wa-grande" href="https://wa.me/573016851905" target="_blank" rel="noopener"><span data-icono="wa"></span> Escríbenos por WhatsApp</a>
-  <div class="copy">Hecho con <span>♥</span> por KIRY'FOOD &middot; Pedidos por WhatsApp</div>
+  <div class="copy">Hecho con <span>♥</span> por KIRY'FOOD &middot; Pedidos en la página</div>
 </footer>
 
 <a href="https://wa.me/573016851905" class="wa-flotante" target="_blank" rel="noopener" title="Escríbenos por WhatsApp"><span data-icono="wa"></span></a>
@@ -414,8 +497,16 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
       <div class="campo"><label>Dirección de entrega</label><input type="text" id="mcDireccion" placeholder="Ej: Calle 18 # 25-40, Barrio Centro"><div class="msj-error" id="mcErrorDireccion">Por favor escribe tu dirección de entrega.</div></div>
       <div class="campo"><label>Punto de referencia <span class="op">(opcional)</span></label><input type="text" id="mcReferencia" placeholder="Ej: Frente al parque, casa azul"></div>
       <div class="nota-dom">* El total incluye <span id="mcNotaDomicilio">$2.000</span> de domicilio</div>
+      <div class="pago-titulo">¿Cómo vas a pagar?</div>
+      <div class="pago-opciones" id="mcPago">
+        <button class="pago-opcion" type="button" data-pago="efectivo"><span class="pago-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.4" y="6.2" width="19.2" height="11.6" rx="2.4"/><circle cx="12" cy="12" r="2.6"/><path d="M6.2 9.6h.01M17.8 14.4h.01"/></svg></span><span>Efectivo</span><small>Pagas al recibir</small></button>
+        <button class="pago-opcion" type="button" data-pago="transferencia"><span class="pago-ico"><span class="nequi-chip" data-nequi aria-hidden="true"></span></span><span>Transferencia</span><small>Nequi</small></button>
+      </div>
+      <div class="msj-error" id="mcErrorPago">Elige cómo vas a pagar.</div>
+      <div class="pago-nota"><svg class="ico-linea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.4" y="6.2" width="19.2" height="11.6" rx="2.4"/><circle cx="12" cy="12" r="2.6"/><path d="M6.2 9.6h.01M17.8 14.4h.01"/></svg><b>Pagas cuando llegue tu pedido</b> a tu domicilio, no antes.</div>
       <div class="resumen"><span>Total del pedido</span><span id="mcTotal">$0</span></div>
-      <button class="btn-verde" id="mcEnviar"><span data-icono="wa"></span> Pedir por WhatsApp</button>
+      <div class="msj-error" id="mcErrorEnvio">No pudimos enviar tu pedido. Revisa tu internet e inténtalo de nuevo.</div>
+      <button class="btn-verde btn-pedir" id="mcEnviar" type="button">Confirmar pedido</button>
     </div>
   </div>
 </div>
@@ -445,6 +536,7 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
       <div class="caja-estado" id="pdEstado"></div>
       <div id="pdAviso"></div>
       <ol class="linea-tiempo" id="pdLinea"></ol>
+      <div id="pdPago"></div>
       <div class="detalle-pie" id="pdPie"></div>
       <a class="btn-wa-mini" id="pdWa" href="https://wa.me/573016851905" target="_blank" rel="noopener"><span data-icono="wa"></span> Escribir al negocio</a>
     </div>
@@ -499,6 +591,24 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
   </div></div>
 </div>
 
+<div id="resultadoPedido" class="rp" role="status" aria-live="assertive" aria-hidden="true">
+  <div class="rp-caja">
+    <div class="rp-icono">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="rp-pista" cx="50" cy="50" r="44"/>
+        <circle class="rp-aro" cx="50" cy="50" r="44"/>
+        <path class="rp-chulo" d="M30 52l14 14 27-30"/>
+        <path class="rp-x1" d="M34 34l32 32"/>
+        <path class="rp-x2" d="M66 34L34 66"/>
+      </svg>
+      <div class="rp-centro" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 8h13l1 12h-15l1-12z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></div>
+      <div id="rpChispas"></div>
+    </div>
+    <div class="rp-titulo" id="rpTitulo"></div>
+    <div class="rp-detalle" id="rpDetalle"></div>
+  </div>
+</div>
+
 <script>
 const CONFIG = {
   audio: "https://res.cloudinary.com/nbf1ok8z/video/upload/v1788013653/WhatsApp_Video_2026-08-29_at_8.51.33_AM.mp4",
@@ -517,6 +627,8 @@ const CONFIG = {
 };
 const NUMERO_WHATSAPP = '573016851905';
 const COSTO_DOMICILIO = 2000;
+/* Logo oficial de Nequi (wordmark) para el pago por transferencia */
+const LOGO_NEQUI = `<svg class="nq-logo" viewBox="0 0 104 33" role="img" aria-label="Nequi"><path class="nq-dot" fill="#DA0081" d="M5.29905 0.283325H0.918073C0.411035 0.283325 0 0.694772 0 1.20232V4.92665C0 5.4342 0.411035 5.84564 0.918073 5.84564H5.29905C5.80609 5.84564 6.21713 5.4342 6.21713 4.92665V1.20232C6.21713 0.694772 5.80609 0.283325 5.29905 0.283325Z"/><path fill="#200020" d="M31.9884 0.283325H28.2195C27.7041 0.283325 27.3014 0.702514 27.3014 1.20232V16.277C27.3014 16.5833 26.8987 16.6962 26.7538 16.4221L17.9918 0.686392C17.8469 0.428429 17.5892 0.283325 17.2831 0.283325H11.0177C10.5023 0.283325 10.0996 0.702514 10.0996 1.20232V25.2896C10.0996 25.8055 10.5184 26.2086 11.0177 26.2086H14.7866C15.302 26.2086 15.7047 25.7894 15.7047 25.2896V9.76345C15.7047 9.45712 16.1074 9.34426 16.2523 9.61834L25.2559 25.8216C25.4008 26.0796 25.6585 26.2247 25.9646 26.2247H31.9562C32.4716 26.2247 32.8743 25.8055 32.8743 25.3057V1.20232C32.8743 0.686392 32.4555 0.283325 31.9562 0.283325H31.9884Z"/><path fill="#200020" d="M54.6487 16.809C54.6487 10.0214 50.2355 6.65173 45.3875 6.65173C39.0898 6.65173 35.498 11.021 35.498 16.9219C35.498 23.6289 40.0079 26.8212 45.2425 26.8212C50.4771 26.8212 53.5374 24.1126 54.3588 20.5978C54.4716 20.1464 54.2139 19.7433 53.5374 19.7433H50.5738C50.2355 19.7433 49.9456 19.9207 49.8007 20.2593C49.0598 21.8876 47.8679 22.7421 45.5807 22.7421C42.9876 22.7421 41.2481 21.1138 40.9904 17.8086H53.7307C54.2783 17.8086 54.6487 17.4055 54.6487 16.809ZM41.1998 14.2455C41.7474 11.811 43.1648 10.7308 45.3069 10.7308C47.2236 10.7308 48.8665 11.8432 49.092 14.2455H41.1998Z"/><path fill="#200020" d="M103.082 7.1355H99.297C98.7899 7.1355 98.3789 7.54694 98.3789 8.05449V25.3057C98.3789 25.8133 98.7899 26.2247 99.297 26.2247H103.082C103.589 26.2247 104 25.8133 104 25.3057V8.05449C104 7.54694 103.589 7.1355 103.082 7.1355Z"/><path fill="#200020" d="M74.9767 7.13548H71.2077C70.6923 7.13548 70.2897 7.55467 70.2897 8.05447V8.98958C69.1622 7.66753 67.31 6.74854 64.8779 6.74854C59.4339 6.74854 56.5508 11.6821 56.5508 16.9058C56.5508 21.4685 58.9184 26.5794 64.7651 26.5794C66.859 26.5794 69.0817 25.5798 70.2897 24.161V31.5774C70.2897 32.0934 70.7084 32.4964 71.2077 32.4964H74.9767C75.4921 32.4964 75.8947 32.0772 75.8947 31.5774V8.07059C75.8947 7.55467 75.476 7.1516 74.9767 7.1516V7.13548ZM66.3919 22.5165C63.9115 22.5165 62.172 20.6946 62.172 16.7768C62.172 12.859 63.9115 10.8114 66.3919 10.8114C68.8723 10.8114 70.6118 12.6978 70.6118 16.7768C70.6118 20.8559 68.8723 22.5165 66.3919 22.5165Z"/><path fill="#200020" d="M95.0453 7.1355H91.2763C90.7609 7.1355 90.3583 7.55469 90.3583 8.05449V17.8087C90.3583 20.9526 88.957 21.8716 87.1692 21.8716C85.3813 21.8716 83.9801 20.9526 83.9801 17.8087V8.05449C83.9801 7.53856 83.5613 7.1355 83.062 7.1355H79.2931C78.7777 7.1355 78.375 7.55469 78.375 8.05449V18.2118C78.375 24.2578 81.7091 26.6923 87.1853 26.6923C92.6615 26.6923 95.9956 24.2416 95.9956 18.2118V8.05449C95.9956 7.53856 95.5768 7.1355 95.0775 7.1355H95.0453Z"/></svg>`;
 const SALSAS = 'papa chongo, lechuga, queso, salsa tártara, salsa rosada, salsa de piña y salsa de mostaza preparada.';
 const PRODUCTOS = [
   { clave:'mini',      nombre:'Mini Salchipapa',        precio:5000,  desc:'Papa, salchicha, ' + SALSAS },
@@ -885,6 +997,9 @@ listaCarrito.addEventListener('click', e => {
 function limpiarErrores() {
   ['mcNombreCliente','mcDireccion'].forEach(id => $(id).classList.remove('campo-error'));
   ['mcErrorNombre','mcErrorDireccion'].forEach(id => $(id).classList.remove('visible'));
+  $('mcPago').classList.remove('pago-error');
+  $('mcErrorPago').classList.remove('visible');
+  $('mcErrorEnvio').classList.remove('visible');
 }
 function abrirModalCarrito() {
   renderCarrito();
@@ -901,6 +1016,87 @@ $('btnVerCarrito').addEventListener('click', abrirModalCarrito);
 $('mcCerrar').addEventListener('click', cerrarModalCarrito);
 modalCarrito.addEventListener('click', e => { if (e.target === modalCarrito) cerrarModalCarrito(); });
 
+let pagoElegido = '';
+$('mcPago').addEventListener('click', e => {
+  const b = e.target.closest('[data-pago]');
+  if (!b) return;
+  pagoElegido = b.dataset.pago;
+  [...$('mcPago').children].forEach(x => x.classList.toggle('activa', x === b));
+  $('mcPago').classList.remove('pago-error');
+  $('mcErrorPago').classList.remove('visible');
+});
+
+/* Animación y sonido al confirmar el pedido */
+function sonidoExito() {
+  if (!sonidoActivo) return;
+  const c = ctxSonido(); if (!c) return;
+  const t = c.currentTime;
+  [[523, 0], [659, .09], [784, .18], [1047, .28]].forEach(([f, d]) => {
+    tono(c, t + d, f, f, .34, .17, 'sine');
+    tono(c, t + d, f * 2, f * 2, .22, .03, 'sine');
+  });
+}
+function sonidoFallo() {
+  if (!sonidoActivo) return;
+  const c = ctxSonido(); if (!c) return;
+  const t = c.currentTime + .4;
+  const filtro = c.createBiquadFilter();
+  filtro.type = 'lowpass'; filtro.frequency.value = 1300; filtro.Q.value = .5;
+  filtro.connect(c.destination);
+  [[330, 0], [247, .14]].forEach(([f, d]) => {
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = 'triangle';
+    o.frequency.setValueAtTime(f, t + d);
+    g.gain.setValueAtTime(0.0001, t + d);
+    g.gain.exponentialRampToValueAtTime(.22, t + d + .012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + d + .24);
+    o.connect(g); g.connect(filtro);
+    o.start(t + d); o.stop(t + d + .26);
+  });
+}
+const rpEl = $('resultadoPedido');
+let rpTimer = null, rpCb = null;
+function rpVibrar(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {} }
+function rpEstado(clase, titulo, detalle) {
+  clearTimeout(rpTimer);
+  rpCb = null;
+  rpEl.className = 'rp abierto ' + clase;
+  rpEl.setAttribute('aria-hidden', 'false');
+  $('rpTitulo').textContent = titulo;
+  $('rpDetalle').textContent = detalle || '';
+  $('rpChispas').innerHTML = '';
+}
+function rpTerminar() {
+  clearTimeout(rpTimer);
+  const f = rpCb; rpCb = null;
+  if (f) f();
+  rpEl.classList.remove('abierto');
+  rpEl.setAttribute('aria-hidden', 'true');
+}
+function pedidoCargando() {
+  rpEstado('rp-cargando', 'Enviando tu pedido…', 'Un momento por favor');
+}
+function pedidoExito(alTerminar) {
+  rpEstado('rp-ok', '¡Pedido enviado!', 'Ya lo recibimos. Te mostramos cómo va.');
+  const cols = ['#2ecc71', '#ffc533', '#7dffb0', '#fff7c9'];
+  let h = '';
+  for (let i = 0; i < 14; i++) {
+    const a = (Math.PI * 2 * i) / 14, d = 62 + Math.random() * 26;
+    h += '<i class="rp-chispa" style="--dx:' + Math.round(Math.cos(a) * d) + 'px;--dy:' + Math.round(Math.sin(a) * d) + 'px;background:' + cols[i % 4] + '"></i>';
+  }
+  $('rpChispas').innerHTML = h;
+  sonidoExito(); rpVibrar(40);
+  rpCb = alTerminar;
+  rpTimer = setTimeout(rpTerminar, 1900);
+}
+function pedidoFallo(titulo, detalle, alCerrar) {
+  rpEstado('rp-error', titulo, detalle);
+  sonidoFallo(); rpVibrar([80, 50, 80]);
+  rpCb = alCerrar;
+  rpTimer = setTimeout(rpTerminar, 2600);
+}
+rpEl.addEventListener('click', () => { if (rpEl.classList.contains('rp-error')) rpTerminar(); });
+
 $('mcEnviar').addEventListener('click', () => {
   if (carrito.length === 0) return;
   const nombreCliente = $('mcNombreCliente').value.trim();
@@ -910,32 +1106,32 @@ $('mcEnviar').addEventListener('click', () => {
   let hayError = false;
   if (!nombreCliente) { $('mcNombreCliente').classList.add('campo-error'); $('mcErrorNombre').classList.add('visible'); hayError = true; }
   if (!direccion) { $('mcDireccion').classList.add('campo-error'); $('mcErrorDireccion').classList.add('visible'); hayError = true; }
-  if (hayError) { (!nombreCliente ? $('mcNombreCliente') : $('mcDireccion')).focus(); return; }
+  if (!pagoElegido) { $('mcPago').classList.add('pago-error'); $('mcErrorPago').classList.add('visible'); hayError = true; }
+  if (hayError) {
+    const faltan = [];
+    if (!nombreCliente) faltan.push('tu nombre');
+    if (!direccion) faltan.push('tu dirección');
+    if (!pagoElegido) faltan.push('cómo vas a pagar');
+    pedidoFallo('Falta algo por completar', 'Revisa: ' + faltan.join(', ').replace(/, ([^,]*)$/, ' y $1') + '.', () => {
+      if (!nombreCliente) $('mcNombreCliente').focus();
+      else if (!direccion) $('mcDireccion').focus();
+      else $('mcPago').scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+    return;
+  }
   const subtotal = subtotalCarrito();
   const total = subtotal + COSTO_DOMICILIO;
   const telefono = (perfil && perfil.tel) || '';
   const codigo = nuevoCodigo();
   const items = carrito.map(i => ({ nombre:i.nombre, precio:i.precio, cantidad:i.cantidad, sin:[...i.ingredientesExcluidos] }));
-  let mensaje = `Datos para tu pedido:\n\nNombre completo: ${nombreCliente}\nDirección de entrega: ${direccion}`;
-  if (referencia) mensaje += `\nPunto de referencia: ${referencia}`;
-  if (telefono) mensaje += `\nCelular: ${telefono}`;
-  mensaje += `\n\nHola, quiero pedir:`;
-  carrito.forEach(item => {
-    mensaje += `\n${item.cantidad}x ${item.nombre} (${formatearCOP(item.precio)} c/u)`;
-    if (item.ingredientesExcluidos.length) mensaje += ` — Sin: ${item.ingredientesExcluidos.join(', ')}`;
-  });
-  mensaje += `\n\nSubtotal: ${formatearCOP(subtotal)}\nDomicilio: ${formatearCOP(COSTO_DOMICILIO)}\nTotal a pagar: ${formatearCOP(total)}`;
-  mensaje += `\n\nCódigo de tu pedido: #${codigo}`;
-  /* 1) WhatsApp primero: así el navegador no bloquea la ventana por el retraso */
-  window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank');
-  /* 2) Se guarda el pedido para el seguimiento en vivo */
-  carrito = [];
-  $('mcNombreCliente').value = '';
-  $('mcDireccion').value = '';
-  $('mcReferencia').value = '';
-  actualizarBarraCarrito();
-  cerrarModalCarrito();
-  abrirPedido(codigo);
+  const pago = pagoElegido;
+  const btn = $('mcEnviar');
+  $('mcErrorEnvio').classList.remove('visible');
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  const t0 = Date.now();
+  pedidoCargando();
+  /* El pedido entra directo al panel del negocio (sin WhatsApp) */
   guardarPedido(codigo, {
     uid: (window.KiryAuth && KiryAuth.usuario) ? KiryAuth.usuario.uid : null,
     nombre: nombreCliente,
@@ -946,9 +1142,32 @@ $('mcEnviar').addEventListener('click', () => {
     subtotal,
     domicilio: COSTO_DOMICILIO,
     total,
+    pago,
     estado: 'recibido',
     fechas: { recibido: new Date().toISOString() }
-  }).then(ok => { if (ok) escucharPedido(codigo); });
+  }).then(ok => {
+    btn.disabled = false;
+    btn.textContent = 'Confirmar pedido';
+    setTimeout(() => {
+      if (!ok) {
+        $('mcErrorEnvio').classList.add('visible');
+        pedidoFallo('No se pudo enviar', 'Revisa tu internet e inténtalo de nuevo.');
+        return;
+      }
+      pedidoExito(() => {
+        carrito = [];
+        $('mcNombreCliente').value = '';
+        $('mcDireccion').value = '';
+        $('mcReferencia').value = '';
+        pagoElegido = '';
+        [...$('mcPago').children].forEach(x => x.classList.remove('activa'));
+        actualizarBarraCarrito();
+        cerrarModalCarrito();
+        abrirPedido(codigo);
+        escucharPedido(codigo);
+      });
+    }, Math.max(0, 1000 - (Date.now() - t0)));
+  });
 });
 
 /* Cuenta con Firebase: registro, ingreso y cierre de sesión */
@@ -1292,6 +1511,7 @@ function abrirPedido(codigo) {
   $('pdSub').textContent = '#' + codigo;
   $('pdEstado').innerHTML = '';
   $('pdAviso').innerHTML = '';
+  $('pdPago').innerHTML = '';
   $('pdPie').innerHTML = '';
   $('pdLinea').innerHTML = '<div class="nota" style="text-align:center;padding:24px 0">Cargando tu pedido…</div>';
   escucharPedido(codigo);
@@ -1353,6 +1573,19 @@ function pintarDetalle(p) {
     const sin = (i.sin && i.sin.length) ? ` <em style="font-style:italic;opacity:.7">(sin ${esc(i.sin.join(', '))})</em>` : '';
     return `<div><span>${i.cantidad}× ${esc(i.nombre)}${sin}</span><span>${formatearCOP(i.precio * i.cantidad)}</span></div>`;
   }).join('');
+
+  /* Aviso: se paga cuando llega el pedido, no antes */
+  const pago = p.pago === 'transferencia' ? 'transferencia' : 'efectivo';
+  $('pdPago').innerHTML = cancelado ? '' : `
+    <div class="pago-aviso">
+      <span class="pago-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.4" y="6.2" width="19.2" height="11.6" rx="2.4"/><circle cx="12" cy="12" r="2.6"/><path d="M6.2 9.6h.01M17.8 14.4h.01"/></svg></span>
+      <div>
+        <b>Pagas tu cuenta una vez llegue el pedido a tu domicilio</b>
+        <small>Ten listo el dinero para entregárselo al domiciliario.</small>
+        ${pago === 'transferencia' ? `<button class="pago-nequi" type="button" data-copiar="3186975406"><span class="nequi-chip" aria-hidden="true">${LOGO_NEQUI}</span> <strong>318 697 5406</strong> <em>toca para copiar</em></button>` : ''}
+      </div>
+    </div>`;
+
   $('pdPie').innerHTML = `
     ${filas}
     <div><span>Domicilio</span><span>${formatearCOP(p.domicilio || 0)}</span></div>
@@ -1368,7 +1601,33 @@ $('pdItems').addEventListener('click', e => {
   const b = e.target.closest('.pedido-item');
   if (b) abrirPedido(b.dataset.cod);
 });
+$('pdPago').addEventListener('click', e => {
+  const b = e.target.closest('[data-copiar]');
+  if (!b) return;
+  const num = b.dataset.copiar;
+  const em = b.querySelector('em');
+  const listo = () => {
+    if (!em) return;
+    const texto = em.textContent;
+    em.textContent = '¡copiado!';
+    setTimeout(() => { em.textContent = texto; }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(num).then(listo).catch(() => {});
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = num;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); listo(); } catch (err) {}
+    ta.remove();
+  }
+});
 window.addEventListener('kiry-sesion', () => { refrescarBotonPedidos(); iniciarVigia(); });
+/* Pinta el logo de Nequi en los espacios marcados */
+document.querySelectorAll('[data-nequi]').forEach(el => { el.innerHTML = LOGO_NEQUI; });
 refrescarBotonPedidos();
 </script>
 <script src="firebase-config.js"></script>
