@@ -11,7 +11,7 @@
 :root{--fondo:#0a0a0a;--fondo2:#1a0a0c;--tarjeta:#141111;--borde:rgba(255,255,255,.07);--vino:#e5262f;--vino2:#ff3b44;--oro:#ffc533;--texto:#f3f4f6;--gris:#9ca3af;--error:#e35d5d;--ok:#2ecc71;--display:'Anton','Impact',sans-serif;--serif:'Playfair Display',serif}
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
 html{scroll-behavior:smooth}
-body{background:var(--fondo);color:var(--gris);padding-bottom:110px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--fondo);color:var(--gris);padding-bottom:170px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 button{font:inherit}
 :focus-visible{outline:2px solid var(--oro);outline-offset:3px}
 .oro{background:linear-gradient(100deg,#e08a00,var(--oro) 30%,#fff7c9 50%,var(--oro) 70%,#e08a00);background-size:250% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:brillo 6s linear infinite}
@@ -88,7 +88,7 @@ button{font:inherit}
 .btn-wa-grande{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;border-radius:40px;background:linear-gradient(120deg,#1ebd59,#25D366);color:#06210f;text-decoration:none;font-weight:600;font-size:15px;box-shadow:0 8px 22px rgba(37,211,102,.3)}
 .copy{margin-top:34px;font-size:11px;color:#6b7280;letter-spacing:1px}
 .copy span{color:var(--oro)}
-.wa-flotante{position:fixed;right:18px;bottom:18px;z-index:500;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;background:linear-gradient(145deg,#25D366,#1ebd59);box-shadow:0 8px 24px rgba(37,211,102,.45)}
+.wa-flotante{position:fixed;right:18px;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:500;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;background:linear-gradient(145deg,#25D366,#1ebd59);box-shadow:0 8px 24px rgba(37,211,102,.45)}
 
 /* Animaciones: salto de WhatsApp y carrito */
 .wa-flotante{animation:saltoWa 5s ease-in-out infinite}
@@ -118,7 +118,7 @@ button{font:inherit}
 @keyframes subeNum{0%{scale:1}35%{scale:1.9;color:var(--oro)}100%{scale:1}}
 
 /* Carrito y modales */
-.barra-carrito{position:fixed;left:16px;right:90px;bottom:18px;z-index:600;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-radius:16px;background:linear-gradient(120deg,#1a1414,#100c0c);border:1px solid rgba(255,197,51,.45);box-shadow:0 10px 30px rgba(0,0,0,.6);transform:translateY(160%);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.barra-carrito{position:fixed;left:16px;right:90px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:600;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-radius:16px;background:linear-gradient(120deg,#1a1414,#100c0c);border:1px solid rgba(255,197,51,.45);box-shadow:0 10px 30px rgba(0,0,0,.6);transform:translateY(160%);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s}
 .barra-carrito.visible{transform:none;opacity:1;pointer-events:auto}
 .barra-info{font-size:13px;color:var(--texto);line-height:1.3}
 .barra-info span{color:var(--oro);font-weight:700}
@@ -413,6 +413,72 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 .rp-chispa{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;opacity:0;animation:rpChispa .8s ease-out .5s forwards}
 @keyframes rpChispa{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)}}
 @media(prefers-reduced-motion:reduce){.rp-chispa{display:none}}
+
+/* ============ BARRA INFERIOR (casa · pedidos · ajustes) ============ */
+.barra-top{justify-content:center}
+.nav-dock{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:550;width:min(calc(100% - 28px),400px);display:grid;grid-template-columns:repeat(3,1fr);padding:5px;border-radius:999px;background:linear-gradient(180deg,rgba(34,28,28,.84),rgba(15,11,11,.92));border:1px solid rgba(255,255,255,.09);box-shadow:0 14px 34px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.07);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4)}
+.nav-pill{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,197,51,.07) 55%,rgba(229,38,47,.14));box-shadow:inset 0 1px 1px rgba(255,255,255,.3),inset 0 -7px 14px rgba(255,197,51,.12),0 4px 18px rgba(229,38,47,.3)}
+.nav-pill::before{content:"";position:absolute;inset:0;padding:1.5px;border-radius:inherit;background:linear-gradient(115deg,#ffc533,#ff3b44,#ff9d3d,#fff1b0,#ffc533);background-size:300% 100%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.nav-pill.mueve::before{animation:barridoBorde .75s ease}
+@keyframes barridoBorde{from{background-position:0 0}to{background-position:100% 0}}
+.nav-tab{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:7px;height:46px;min-width:0;padding:0 6px;border:0;border-radius:999px;background:none;color:var(--gris);font-size:12.5px;font-weight:500;white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .3s}
+.nav-tab.activa{color:#fff;font-weight:600}
+.nav-dock{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.nav-ico{position:relative;display:inline-flex}
+.nav-tab .ic{width:19px;height:19px;flex-shrink:0}
+.nav-tab .punto-pedido{top:-4px;right:-5px}
+.nav-tab.go[data-tab="menu"] .ic{animation:icCasa .7s cubic-bezier(.3,1.6,.5,1)}
+.nav-tab.go[data-tab="pedidos"] .ic{animation:icPedido .75s ease}
+.nav-tab.go[data-tab="ajustes"] .ic{animation:icEngranaje .8s cubic-bezier(.3,1.3,.5,1)}
+@keyframes icCasa{0%{translate:0 0;scale:1}35%{translate:0 -5px;scale:1.2}65%{translate:0 0;scale:.92}100%{translate:0 0;scale:1}}
+@keyframes icPedido{0%{rotate:0deg;scale:1}25%{rotate:-14deg;scale:1.15}55%{rotate:10deg}80%{rotate:-4deg}100%{rotate:0deg;scale:1}}
+@keyframes icEngranaje{from{rotate:0deg}to{rotate:180deg}}
+@media(prefers-reduced-motion:reduce){.nav-tab .ic,.nav-pill::before{animation:none!important}}
+/* Panel de configuración */
+.aj-fila{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-bottom:12px;border-radius:14px;border:1px solid var(--borde);background:rgba(255,255,255,.03);cursor:pointer}
+.aj-ic{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border-radius:50%;background:rgba(255,197,51,.1);border:1px solid rgba(255,197,51,.3);color:var(--oro)}
+.aj-ic .ic{width:19px;height:19px}
+.aj-txt{flex:1;min-width:0}
+.aj-tit{font-size:14px;font-weight:600;color:var(--texto)}
+.aj-sub{margin-top:2px;font-size:12px;font-weight:300}
+.aj-switch{position:relative;flex-shrink:0;width:56px;height:32px;padding:0;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);cursor:pointer;transition:background .3s,border-color .3s}
+.aj-switch .ic{display:none}
+.aj-switch::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#8b8f97;transition:translate .3s cubic-bezier(.3,1.4,.5,1),background .3s}
+.aj-switch[aria-pressed="true"]{background:rgba(229,38,47,.4);border-color:var(--vino2)}
+.aj-switch[aria-pressed="true"]::after{translate:24px 0;background:var(--oro)}
+#modalAjustes .btn-sesion{width:100%;height:50px;justify-content:center;gap:9px;margin-top:6px;border-radius:14px;font-size:14px}
+#modalAjustes .btn-sesion .ic{width:18px;height:18px}
+/* Cuenta dentro de Ajustes */
+.aj-cuenta{padding:14px 16px;border-radius:16px;border:1px solid var(--borde);background:rgba(255,255,255,.03)}
+.aj-cuenta[hidden]{display:none}
+.aj-cuenta-cab{display:flex;align-items:center;gap:12px}
+.aj-avatar{display:grid;place-items:center;width:46px;height:46px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,197,51,.28),rgba(255,197,51,.07));border:1px solid rgba(255,197,51,.45);color:var(--oro);font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.aj-cuenta-info{flex:1;min-width:0}
+.aj-cuenta-info .aj-tit{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aj-cuenta-info .aj-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--gris)}
+.aj-datos{display:grid;gap:8px;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.12)}
+.aj-datos[hidden]{display:none}
+.aj-dato{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font-size:12.5px;color:var(--gris)}
+.aj-dato b{font-weight:600;color:var(--texto);text-align:right;overflow-wrap:anywhere}
+.aj-acciones{display:flex;gap:8px;margin-top:12px}
+.aj-acciones.apilada{flex-direction:column}
+.aj-acciones.apilada > *{flex:none;width:100%}
+.aj-btn{flex:1;height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--borde);background:rgba(255,255,255,.05);color:var(--texto);font-size:13.5px;font-weight:600;cursor:pointer;transition:transform .2s,filter .2s}
+.aj-btn:active{transform:scale(.985)}
+.aj-btn:disabled{opacity:.65;cursor:wait}
+.aj-btn.oro{border-color:transparent;background:linear-gradient(120deg,#ffd45c,#ffc533 55%,#e0a300);color:#1a1305;box-shadow:0 6px 16px rgba(255,197,51,.22)}
+#modalAjustes .aj-acciones .btn-sesion{height:44px;margin:0;padding:0 12px;border-radius:12px;font-size:13.5px}
+#modalAjustes .btn-sesion.oro{border-color:transparent;background:linear-gradient(120deg,#ffd45c,#ffc533 55%,#e0a300);color:#1a1305;box-shadow:0 6px 16px rgba(255,197,51,.22)}
+.aj-form{margin-top:4px}
+.aj-form[hidden]{display:none}
+.aj-form-tit{margin-bottom:14px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--oro)}
+.aj-form .campo{margin-bottom:14px}
+.aj-form .campo input{font-size:16px;padding:12px 14px}
+.aj-form .campo input:disabled{opacity:.55}
+.aj-msg{min-height:18px;margin:0 0 10px;font-size:12.5px;line-height:1.45;color:var(--gris)}
+.aj-msg.ok{color:var(--ok)}
+.aj-msg.err{color:var(--error)}
+.aj-link{display:block;width:100%;margin-top:14px;padding:8px;border:0;background:none;color:var(--gris);font-size:12px;text-decoration:underline;cursor:pointer}
 </style>
 </head>
 <body>
@@ -427,7 +493,7 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 
 <div class="barra-top">
   <div class="marca"><img data-img="logo" alt="KIRY'FOOD"><span>KIRY'FOOD</span></div>
-  <div class="acciones"><button id="btnPedidos" class="btn-sesion btn-pedidos" type="button" hidden><span class="punto-pedido" aria-hidden="true"></span><span>Pedidos</span></button><button id="btnSesion" class="btn-sesion" type="button" hidden></button><button id="btnSonido" class="btn-sonido" title="Silenciar / Activar sonido"></button></div>
+
 </div>
 
 <header class="hero">
@@ -457,6 +523,62 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 </footer>
 
 <a href="https://wa.me/573016851905" class="wa-flotante" target="_blank" rel="noopener" title="Escríbenos por WhatsApp"><span data-icono="wa"></span></a>
+
+<nav id="navDock" class="nav-dock" aria-label="Navegación principal">
+  <span class="nav-pill" aria-hidden="true"></span>
+  <button type="button" class="nav-tab activa" data-tab="menu" aria-label="Menú"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Menú</span></button>
+  <button type="button" id="btnPedidos" class="nav-tab btn-pedidos" data-tab="pedidos"><span class="nav-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><span class="punto-pedido" aria-hidden="true" style="display:none"></span></span><span>Pedidos</span></button>
+  <button type="button" id="btnAjustes" class="nav-tab" data-tab="ajustes"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg><span>Ajustes</span></button>
+</nav>
+
+<div id="modalAjustes" class="modal" role="dialog" aria-modal="true" aria-label="Configuración">
+  <div class="caja">
+    <div class="manija"></div>
+    <div class="enc">
+      <div>
+        <div class="enc-nombre">Configuración</div>
+        <div style="margin-top:3px;font-size:12px;font-weight:400;color:var(--gris)">Ajusta la página a tu gusto</div>
+      </div>
+      <button class="x" id="ajCerrar" type="button" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="aj-fila" id="ajFilaSonido">
+      <span class="aj-ic" id="ajSonidoIc"></span>
+      <div class="aj-txt"><div class="aj-tit">Sonido</div><div class="aj-sub" id="ajSonidoTxt">Activado</div></div>
+      <button type="button" id="btnSonido" class="aj-switch" role="switch" aria-label="Activar o silenciar el sonido" title="Silenciar / Activar sonido"></button>
+    </div>
+    <div class="aj-cuenta" id="ajCuenta" hidden>
+      <div class="aj-cuenta-cab">
+        <div class="aj-avatar" id="ajAvatar">?</div>
+        <div class="aj-cuenta-info">
+          <div class="aj-tit" id="ajCuentaNombre">Invitado</div>
+          <div class="aj-sub" id="ajCuentaCorreo">Inicia sesión para guardar tus datos</div>
+        </div>
+      </div>
+      <div class="aj-datos" id="ajDatos" hidden>
+        <div class="aj-dato"><span>Celular</span><b id="ajDatoTel">—</b></div>
+        <div class="aj-dato"><span>Dirección</span><b id="ajDatoDir">—</b></div>
+      </div>
+      <div class="aj-acciones apilada">
+        <button type="button" class="aj-btn oro" id="btnEditarPerfil" hidden>Editar mis datos</button>
+        <button id="btnSesion" class="btn-sesion" type="button" hidden></button>
+      </div>
+    </div>
+
+    <form class="aj-form" id="ajFormPerfil" hidden novalidate>
+      <div class="aj-form-tit">Mis datos</div>
+      <div class="campo"><label for="ajNombre">Nombre completo</label><input type="text" id="ajNombre" autocomplete="name" placeholder="Ej: Juan Pérez"></div>
+      <div class="campo"><label for="ajTel">Celular</label><input type="tel" inputmode="tel" id="ajTel" autocomplete="tel" placeholder="300 123 4567"></div>
+      <div class="campo"><label for="ajDir">Dirección de entrega</label><input type="text" id="ajDir" autocomplete="street-address" placeholder="Calle 18 # 25-40, Barrio Centro"></div>
+      <div class="campo"><label for="ajCorreo">Correo</label><input type="email" id="ajCorreo" disabled></div>
+      <p class="aj-msg" id="ajMsgPerfil" role="status"></p>
+      <div class="aj-acciones">
+        <button type="submit" class="aj-btn oro" id="ajGuardar">Guardar</button>
+        <button type="button" class="aj-btn" id="ajCancelar">Cancelar</button>
+      </div>
+      <button type="button" class="aj-link" id="ajCambiarClave">Cambiar mi contraseña</button>
+    </form>
+  </div>
+</div>
 
 <div id="barraCarrito" class="barra-carrito">
   <div class="barra-info"><span id="carritoCantidad">0</span> productos · <span id="carritoTotalBarra">$0</span></div>
@@ -610,6 +732,144 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
 </div>
 
 <script>
+/* Barra inferior: píldora de vidrio que se desliza y se estira entre las opciones */
+const KiryNav = (function () {
+  const dock = document.getElementById('navDock');
+  const noop = { ir(n, f) { if (f) f(); } };
+  if (!dock) return noop;
+  const pill = dock.querySelector('.nav-pill');
+  const tabs = Array.from(dock.querySelectorAll('.nav-tab'));
+  const modalPed = document.getElementById('modalPedidos');
+  const modalAj = document.getElementById('modalAjustes');
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let actual = null, ocupado = false;
+
+  function colocar() {
+    const t = tabs.find(x => x.dataset.tab === actual);
+    if (!t) return;
+    pill.style.left = t.offsetLeft + 'px';
+    pill.style.width = t.offsetWidth + 'px';
+  }
+  function mover(nombre, animar) {
+    const t = tabs.find(x => x.dataset.tab === nombre);
+    if (!t) return;
+    const antes = { left: pill.offsetLeft, width: pill.offsetWidth };
+    const ahora = { left: t.offsetLeft, width: t.offsetWidth };
+    actual = nombre;
+    pill.style.left = ahora.left + 'px';
+    pill.style.width = ahora.width + 'px';
+    tabs.forEach(x => {
+      const on = x === t;
+      x.classList.toggle('activa', on);
+      if (on) x.setAttribute('aria-current', 'page'); else x.removeAttribute('aria-current');
+    });
+    if (!animar) return;
+    if (window.sonidoDeslizarNav) window.sonidoDeslizarNav(ahora.left >= antes.left ? 1 : -1);
+    if (!reduce && antes.width > 0 && pill.animate) {
+      const izq = Math.min(antes.left, ahora.left);
+      const der = Math.max(antes.left + antes.width, ahora.left + ahora.width);
+      pill.animate([
+        { left: antes.left + 'px', width: antes.width + 'px', transform: 'scale(1,1)' },
+        { left: izq + 'px', width: (der - izq) + 'px', transform: 'scale(1,.9)', offset: .45 },
+        { left: ahora.left + 'px', width: ahora.width + 'px', transform: 'scale(1,1)' }
+      ], { duration: 560, easing: 'cubic-bezier(.3,.8,.3,1)' });
+    }
+    pill.classList.remove('mueve'); void pill.offsetWidth; pill.classList.add('mueve');
+    t.classList.remove('go'); void t.offsetWidth; t.classList.add('go');
+    setTimeout(() => t.classList.remove('go'), 900);
+  }
+  /* Mueve la píldora y, un instante después, hace lo que toca (abrir un panel, bajar al menú...) */
+  function ir(nombre, accion) {
+    if (ocupado) return;
+    if (nombre !== actual) {
+      ocupado = true;
+      mover(nombre, true);
+      setTimeout(() => { ocupado = false; if (accion) accion(); }, reduce ? 0 : 260);
+    } else if (accion) {
+      accion();
+    }
+  }
+  /* La píldora siempre sigue a lo que esté abierto, se abra como se abra */
+  function sincronizar() {
+    const n = modalPed && modalPed.classList.contains('abierto') ? 'pedidos'
+            : modalAj.classList.contains('abierto') ? 'ajustes' : 'menu';
+    if (n !== actual) mover(n, true);
+  }
+  const obs = new MutationObserver(sincronizar);
+  [modalPed, modalAj].forEach(m => { if (m) obs.observe(m, { attributes: true, attributeFilter: ['class'] }); });
+
+  function abrirAjustes() { modalAj.classList.add('abierto'); document.body.style.overflow = 'hidden'; }
+  function cerrarAjustes() { modalAj.classList.remove('abierto'); document.body.style.overflow = 'auto'; }
+
+  dock.querySelector('[data-tab="menu"]').addEventListener('click', () => {
+    ir('menu', () => { const m = document.getElementById('menu'); if (m) m.scrollIntoView({ behavior: 'smooth' }); });
+  });
+  document.getElementById('btnAjustes').addEventListener('click', () => ir('ajustes', abrirAjustes));
+  document.getElementById('ajCerrar').addEventListener('click', cerrarAjustes);
+  modalAj.addEventListener('click', e => { if (e.target === modalAj) cerrarAjustes(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalAj.classList.contains('abierto')) cerrarAjustes(); });
+  /* Tocar toda la fila de Sonido también lo cambia */
+  document.getElementById('ajFilaSonido').addEventListener('click', e => {
+    if (!e.target.closest('#btnSonido')) document.getElementById('btnSonido').click();
+  });
+  /* Si va a ingresar, se cierra el panel para que no se encime con el registro */
+  document.getElementById('btnSesion').addEventListener('click', () => {
+    if (!(window.KiryAuth && KiryAuth.usuario)) cerrarAjustes();
+  });
+
+  /* Toque suave al hundir cualquiera de los botones */
+  tabs.forEach(t => t.addEventListener('pointerdown', () => { if (window.sonidoToqueNav) window.sonidoToqueNav(); }));
+
+  /* Deslizar el dedo por la barra: la píldora sigue al dedo y, al pasar de un botón a otro,
+     suena y vibra un poquito. Al soltar se abre lo que quedó marcado. */
+  let arrastre = null, ultimoArrastre = 0;
+  const tabCercana = x => {
+    let mejor = null, dist = Infinity;
+    tabs.forEach(t => {
+      const r = t.getBoundingClientRect();
+      const d = Math.abs(x - (r.left + r.width / 2));
+      if (d < dist) { dist = d; mejor = t; }
+    });
+    return mejor;
+  };
+  dock.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    arrastre = { id: e.pointerId, inicio: actual, movio: false };
+  });
+  dock.addEventListener('pointermove', e => {
+    if (!arrastre || e.pointerId !== arrastre.id) return;
+    if (!e.buttons) { arrastre = null; return; }
+    const t = tabCercana(e.clientX);
+    if (!t || t.dataset.tab === actual) return;
+    arrastre.movio = true;
+    mover(t.dataset.tab, true);
+    try { if (navigator.vibrate) navigator.vibrate(8); } catch (err) {}
+  });
+  function soltarDedo(e) {
+    if (!arrastre || e.pointerId !== arrastre.id) return;
+    const a = arrastre; arrastre = null;
+    if (!a.movio) return;               /* un toque normal lo maneja el clic de cada botón */
+    ultimoArrastre = performance.now();
+    if (e.type === 'pointercancel') { if (a.inicio && a.inicio !== actual) mover(a.inicio, true); return; }
+    if (actual === a.inicio) return;    /* volvió al mismo botón: no abre nada */
+    const destino = tabs.find(x => x.dataset.tab === actual);
+    if (destino) destino.click();
+  }
+  dock.addEventListener('pointerup', soltarDedo);
+  dock.addEventListener('pointercancel', soltarDedo);
+  /* El clic del navegador que llega justo después de arrastrar se ignora para no abrir dos veces */
+  dock.addEventListener('click', e => {
+    if (e.isTrusted && performance.now() - ultimoArrastre < 500) { e.stopPropagation(); e.preventDefault(); }
+  }, true);
+
+  mover('menu', false);
+  window.addEventListener('resize', colocar);
+  window.addEventListener('load', colocar);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(colocar);
+  return { ir };
+})();
+</script>
+<script>
 const CONFIG = {
   audio: "https://res.cloudinary.com/nbf1ok8z/video/upload/v1788013653/WhatsApp_Video_2026-08-29_at_8.51.33_AM.mp4",
   imagenes: {
@@ -710,7 +970,14 @@ const audio = document.getElementById('audioBienvenida');
 const btnSonido = document.getElementById('btnSonido');
 const intro = document.getElementById('intro');
 let sonidoActivo = true;
-btnSonido.innerHTML = ICONOS.sonidoOn;
+function pintarSonido() {
+  const ic = sonidoActivo ? ICONOS.sonidoOn : ICONOS.sonidoOff;
+  btnSonido.innerHTML = ic;
+  btnSonido.setAttribute('aria-pressed', sonidoActivo ? 'true' : 'false');
+  const i = document.getElementById('ajSonidoIc'); if (i) i.innerHTML = ic;
+  const t = document.getElementById('ajSonidoTxt'); if (t) t.textContent = sonidoActivo ? 'Activado' : 'Silenciado';
+}
+pintarSonido();
 document.body.style.overflow = 'hidden';
 let audioIniciado = false;
 window.addEventListener('load', () => { audio.preload = 'auto'; audio.src = CONFIG.audio; audio.load(); });
@@ -739,17 +1006,15 @@ document.getElementById('btnIniciar').addEventListener('click', () => {
   iniciarObservadorVideos();
   setTimeout(() => intro.remove(), 900);
 }, { once:true });
-audio.addEventListener('ended', () => { btnSonido.innerHTML = ICONOS.sonidoOff; });
 btnSonido.addEventListener('click', () => {
   sonidoActivo = !sonidoActivo;
   if (sonidoActivo) {
     if (!audio.src) audio.src = CONFIG.audio;
     audio.play().catch(() => {});
-    btnSonido.innerHTML = ICONOS.sonidoOn;
   } else {
     audio.pause();
-    btnSonido.innerHTML = ICONOS.sonidoOff;
   }
+  pintarSonido();
 });
 
 /* Efectos de sonido del carrito (se generan al momento, sin descargar nada) */
@@ -795,6 +1060,60 @@ function sonidoLlegada() {
   tono(c, t, 988, 988, .22, .2, 'sine');
   tono(c, t + .075, 1480, 1480, .3, .17, 'sine');
   tono(c, t + .075, 2960, 2960, .18, .03, 'sine');
+}
+
+/* Sonidos de la barra inferior: hechos con ruido filtrado (como un toque real), no con pitidos.
+   Cada vez suenan un poquito distinto para que no se note que es el mismo sonido repetido. */
+let bufferRuido = null;
+function ruidoBase(c) {
+  if (!bufferRuido || bufferRuido.sampleRate !== c.sampleRate) {
+    const n = Math.floor(c.sampleRate * .6);
+    bufferRuido = c.createBuffer(1, n, c.sampleRate);
+    const d = bufferRuido.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+  }
+  return bufferRuido;
+}
+const variar = (v, p) => v * (1 - p + Math.random() * p * 2);
+/* Al hundir el botón: un "toc" corto y suave */
+function sonidoToqueNav() {
+  if (!sonidoActivo) return;
+  const c = ctxSonido(); if (!c) return;
+  const t = c.currentTime;
+  const fuente = c.createBufferSource();
+  fuente.buffer = ruidoBase(c);
+  const filtro = c.createBiquadFilter();
+  filtro.type = 'bandpass';
+  filtro.frequency.value = variar(2000, .1);
+  filtro.Q.value = 1.1;
+  const g = c.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(.4, t + .004);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + .04);
+  fuente.connect(filtro); filtro.connect(g); g.connect(c.destination);
+  fuente.start(t, Math.random() * .3); fuente.stop(t + .06);
+  tono(c, t, variar(170, .06), 85, .07, .1, 'sine');
+}
+/* Al deslizarse la píldora: un "fiuu" suave que sube si va a la derecha y baja si va a la izquierda */
+function sonidoDeslizarNav(dir) {
+  if (!sonidoActivo) return;
+  const c = ctxSonido(); if (!c) return;
+  const t = c.currentTime + .02;
+  const dur = .24;
+  const fuente = c.createBufferSource();
+  fuente.buffer = ruidoBase(c);
+  const filtro = c.createBiquadFilter();
+  filtro.type = 'bandpass';
+  filtro.Q.value = .8;
+  const a = variar(650, .08), b = variar(1500, .08);
+  filtro.frequency.setValueAtTime(dir >= 0 ? a : b, t);
+  filtro.frequency.exponentialRampToValueAtTime(dir >= 0 ? b : a, t + dur);
+  const g = c.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(.45, t + dur * .38);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  fuente.connect(filtro); filtro.connect(g); g.connect(c.destination);
+  fuente.start(t, Math.random() * .3); fuente.stop(t + dur + .03);
 }
 
 /* Ingredientes */
@@ -1257,11 +1576,51 @@ function aplicarPerfil() {
   if (!$('mcNombreCliente').value) $('mcNombreCliente').value = perfil.nombre || '';
   if (!$('mcDireccion').value) $('mcDireccion').value = perfil.dir || '';
 }
+function iniciales(txt) {
+  const partes = String(txt || '').replace(/@.*/, '').trim().split(/\s+/).filter(Boolean);
+  return (partes.slice(0, 2).map(p => p[0]).join('') || '?').toUpperCase();
+}
 function pintarSesion() {
-  const b = $('btnSesion');
-  if (!window.KiryAuth) { b.hidden = true; return; }
+  const b = $('btnSesion'), cuenta = $('ajCuenta'), form = $('ajFormPerfil');
+  if (!window.KiryAuth) { b.hidden = true; if (cuenta) cuenta.hidden = true; return; }
+  const u = KiryAuth.usuario;
+  const logueado = !!u;
+  const p = perfil || {};
+  const nombre = String(p.nombre || (u && u.displayName) || '').trim();
+  const correo = String(p.correo || (u && u.email) || '').trim();
+  if (!logueado && form) form.hidden = true;
+  if (cuenta) cuenta.hidden = !!(form && !form.hidden);
+  $('ajAvatar').textContent = logueado ? iniciales(nombre || correo) : '?';
+  $('ajCuentaNombre').textContent = logueado ? (nombre || 'Mi cuenta') : 'Invitado';
+  $('ajCuentaCorreo').textContent = logueado ? (correo || 'Cuenta de KIRY\'FOOD') : 'Inicia sesión para guardar tus datos';
+  $('ajDatos').hidden = !logueado;
+  if (logueado) {
+    $('ajDatoTel').textContent = p.tel || '—';
+    $('ajDatoDir').textContent = p.dir || '—';
+  }
+  $('btnEditarPerfil').hidden = !logueado;
   b.hidden = false;
-  b.innerHTML = KiryAuth.usuario ? ICONOS.salir + '<span>Salir</span>' : ICONOS.entrar + '<span>Ingresar</span>';
+  b.classList.toggle('oro', !logueado);
+  b.innerHTML = logueado
+    ? ICONOS.salir + '<span>Cerrar sesión</span>'
+    : ICONOS.entrar + '<span>Ya tengo cuenta · Ingresar</span>';
+}
+function abrirEdicionPerfil() {
+  if (!window.KiryAuth || !KiryAuth.usuario) return;
+  const p = perfil || {}, u = KiryAuth.usuario;
+  $('ajNombre').value = p.nombre || u.displayName || '';
+  $('ajTel').value = p.tel || '';
+  $('ajDir').value = p.dir || '';
+  $('ajCorreo').value = p.correo || u.email || '';
+  $('ajMsgPerfil').textContent = '';
+  $('ajMsgPerfil').className = 'aj-msg';
+  $('ajCuenta').hidden = true;
+  $('ajFormPerfil').hidden = false;
+  $('ajNombre').focus();
+}
+function cerrarEdicionPerfil() {
+  $('ajFormPerfil').hidden = true;
+  $('ajCuenta').hidden = false;
 }
 async function mostrarRegistro() {
   if (!window.KiryAuth) return;
@@ -1287,6 +1646,54 @@ $('btnSesion').addEventListener('click', async () => {
     if (confirm('¿Quieres cerrar sesión?')) { try { await KiryAuth.salir(); } catch (e) {} }
   } else {
     rgAbrir('login');
+  }
+});
+$('btnEditarPerfil').addEventListener('click', abrirEdicionPerfil);
+$('ajCancelar').addEventListener('click', cerrarEdicionPerfil);
+$('ajFormPerfil').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!window.KiryAuth || !KiryAuth.usuario) return;
+  const nombre = $('ajNombre').value.trim();
+  const tel = $('ajTel').value.trim();
+  const dir = $('ajDir').value.trim();
+  const msg = $('ajMsgPerfil');
+  msg.className = 'aj-msg';
+  let error = '';
+  if (nombre.length < 3) error = 'Escribe tu nombre completo.';
+  else if (tel.replace(/\D/g, '').length < 7) error = 'Escribe un celular válido.';
+  else if (dir.length < 5) error = 'Escribe tu dirección de entrega.';
+  if (error) { msg.textContent = error; msg.classList.add('err'); return; }
+  const btn = $('ajGuardar');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+  try {
+    const p = await KiryAuth.actualizarPerfil({ nombre, tel, dir });
+    perfil = p;
+    $('mcNombreCliente').value = nombre;
+    $('mcDireccion').value = dir;
+    msg.textContent = 'Datos guardados';
+    msg.classList.add('ok');
+    pintarSesion();
+    setTimeout(cerrarEdicionPerfil, 900);
+  } catch (err) {
+    console.warn('No se pudo actualizar el perfil', err);
+    msg.textContent = 'No se pudieron guardar. Revisa tu internet e inténtalo de nuevo.';
+    msg.classList.add('err');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Guardar';
+  }
+});
+$('ajCambiarClave').addEventListener('click', async () => {
+  const msg = $('ajMsgPerfil');
+  const correo = (perfil && perfil.correo) || (window.KiryAuth && KiryAuth.usuario && KiryAuth.usuario.email) || '';
+  if (!correo) return;
+  msg.className = 'aj-msg';
+  try {
+    await KiryAuth.recuperar(correo);
+    msg.textContent = 'Te enviamos un correo a ' + correo + ' para cambiar tu contraseña.';
+    msg.classList.add('ok');
+  } catch (err) {
+    msg.textContent = 'No se pudo enviar el correo. Inténtalo más tarde.';
+    msg.classList.add('err');
   }
 });
 document.querySelectorAll('[data-rg]').forEach(b => b.addEventListener('click', () => { if (!rgOcupado) rgIr(b.dataset.rg); }));
@@ -1404,7 +1811,7 @@ function haceCuanto(d) {
 function refrescarBotonPedidos() {
   const b = $('btnPedidos');
   if (!b) return;
-  b.hidden = !(esUsuario() || leerCodigos().length > 0);
+  b.hidden = false;
 }
 function actualizarPunto() {
   const punto = document.querySelector('#btnPedidos .punto-pedido');
@@ -1593,7 +2000,7 @@ function pintarDetalle(p) {
     <div style="margin-top:10px;font-size:12px;opacity:.8">Entregar en: ${esc(p.direccion || '')}${p.referencia ? ' · ' + esc(p.referencia) : ''}</div>`;
 }
 
-$('btnPedidos').addEventListener('click', abrirMisPedidos);
+$('btnPedidos').addEventListener('click', () => KiryNav.ir('pedidos', abrirMisPedidos));
 $('pdCerrar').addEventListener('click', cerrarPedidos);
 $('pdVolver').addEventListener('click', mostrarLista);
 $('modalPedidos').addEventListener('click', e => { if (e.target === $('modalPedidos')) cerrarPedidos(); });
@@ -1689,6 +2096,22 @@ if (!FIREBASE_CONFIG.apiKey.startsWith("PEGA")) {
           const c = await signInWithEmailAndPassword(auth, correo, clave);
           estado.usuario = c.user; estado.perfil = await cargarPerfil(c.user);
         } finally { ocupado = false; }
+        avisar();
+        return estado.perfil;
+      },
+      async actualizarPerfil(datos) {
+        if (!estado.usuario) throw new Error("sin-sesion");
+        const limpio = {};
+        if (datos.nombre !== undefined) limpio.nombre = datos.nombre;
+        if (datos.tel !== undefined) limpio.tel = datos.tel;
+        if (datos.dir !== undefined) limpio.dir = datos.dir;
+        await setDoc(doc(db, "usuarios", estado.usuario.uid), limpio, { merge: true });
+        if (limpio.nombre) { try { await updateProfile(estado.usuario, { displayName: limpio.nombre }); } catch (e) {} }
+        estado.perfil = {
+          ...(estado.perfil || {}),
+          ...limpio,
+          correo: estado.usuario.email || (estado.perfil || {}).correo || ""
+        };
         avisar();
         return estado.perfil;
       },
