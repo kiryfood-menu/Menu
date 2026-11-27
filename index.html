@@ -717,6 +717,20 @@ body.entrada .hero>*{animation:subir .8s cubic-bezier(.2,.8,.2,1) both;animation
       <button class="rg-skip rg-st" style="--i:6" data-skip type="button">Ahora no, ver el menú</button>
     </form>
 
+    <form class="rg-view" id="rgDatos" novalidate>
+      <h2 class="rg-st" style="--i:0">Casi listo, <b id="rgDNombreTxt">amigo</b></h2>
+      <p class="rg-sub rg-st" style="--i:1">Solo falta tu celular y tu dirección para llevarte el pedido.</p>
+      <label class="rg-l rg-st" style="--i:2" for="rgDNombre">Nombre completo</label>
+      <div class="rg-f rg-st" style="--i:2"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><input id="rgDNombre" autocomplete="name" placeholder="Juan Pérez"></div>
+      <label class="rg-l rg-st" style="--i:3" for="rgDTel">Celular</label>
+      <div class="rg-f rg-st" style="--i:3"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><input id="rgDTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567"></div>
+      <label class="rg-l rg-st" style="--i:4" for="rgDDir">Dirección de entrega</label>
+      <div class="rg-f rg-st" style="--i:4"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><input id="rgDDir" autocomplete="street-address" placeholder="Calle 18 # 25-40, Barrio Centro"></div>
+      <p class="rg-err" id="rgDErr" role="alert"></p>
+      <button class="rg-btn rg-st" style="--i:5" type="submit">Guardar y empezar</button>
+      <button class="rg-skip rg-st" style="--i:6" type="button" id="rgDSkip">Lo hago después</button>
+    </form>
+
     <div class="rg-view rg-ok" id="rgOk">
       <svg class="rg-chk rg-st" style="--i:0" viewBox="0 0 80 80"><circle cx="40" cy="40" r="30"/><path d="M27 41l9 9 18-20"/></svg>
       <h2 class="rg-st" style="--i:2">Bienvenido, <b id="rgNombreOk"></b></h2>
@@ -1506,10 +1520,10 @@ const leer = k => { try { return localStorage.getItem(k); } catch (e) { return n
 const guardar = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
 let perfil = null;
 const regOverlay = $('registro'), rgCard = $('rgCard'), rgLoader = $('rgLoader');
-const rgForm = $('rgForm'), rgLogin = $('rgLogin'), rgOk = $('rgOk');
+const rgForm = $('rgForm'), rgLogin = $('rgLogin'), rgOk = $('rgOk'), rgDatos = $('rgDatos');
 const rgErr = $('rgErr'), rgErrL = $('rgErrL');
-const RG_VISTAS = { reg: rgForm, login: rgLogin };
-const RG_H = { reg: 719, login: 513, ok: 270 };
+const RG_VISTAS = { reg: rgForm, login: rgLogin, datos: rgDatos };
+const RG_H = { reg: 719, login: 513, datos: 470, ok: 270 };
 const REGEX_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 let rgActual = null, rgOcupado = false;
 const ERRORES = {
@@ -1542,7 +1556,7 @@ function rgFalla(vista, el, txt) {
   vista.classList.remove('rg-shake'); void vista.offsetWidth; vista.classList.add('rg-shake');
 }
 function rgReset() {
-  [rgForm, rgLogin, rgOk].forEach(v => v.classList.remove('on', 'in', 'out', 'rg-shake'));
+  [rgForm, rgLogin, rgDatos, rgOk].forEach(v => v.classList.remove('on', 'in', 'out', 'rg-shake'));
   [rgErr, rgErrL].forEach(e => e.classList.remove('show', 'ok'));
   ['rgClave', 'rgClave2', 'rgLClave'].forEach(id => { $(id).value = ''; });
   rgLoader.classList.remove('on');
@@ -1586,6 +1600,18 @@ function rgExito(vista, nombre) {
     rgOk.classList.add('on'); void rgOk.offsetWidth; rgOk.classList.add('in');
   }, 1500);
   setTimeout(rgCerrar, 3700);
+}
+function rgDatosAbrir(p) {
+  const nombre = String((p && p.nombre) || '');
+  $('rgDNombre').value = nombre;
+  $('rgDTel').value = (p && p.tel) || '';
+  $('rgDDir').value = (p && p.dir) || '';
+  $('rgDNombreTxt').textContent = nombre.split(' ')[0] || 'amigo';
+  const e = $('rgDErr');
+  e.textContent = ''; e.classList.remove('show', 'ok');
+  const b = rgDatos.querySelector('button[type=submit]');
+  b.disabled = false; b.textContent = 'Guardar y empezar';
+  rgIr('datos');
 }
 function aplicarPerfil() {
   if (!perfil) return;
@@ -1648,12 +1674,30 @@ async function mostrarRegistro() {
   rgAbrir('reg');
 }
 
+/* Si el navegador bloqueó la ventana de Google, la página se recarga.
+   Al volver, si faltan datos, pedimos celular y dirección. */
+let googlePendRevisado = false;
+function revisarGooglePendiente() {
+  if (googlePendRevisado) return;
+  let pend = null;
+  try { pend = localStorage.getItem('kiry_google_pend'); } catch (e) { return; }
+  if (!pend) return;
+  googlePendRevisado = true;
+  try { localStorage.removeItem('kiry_google_pend'); } catch (e) {}
+  if (!window.KiryAuth || !KiryAuth.usuario) return;
+  const p = perfil || {};
+  if (p.tel && p.dir) return;
+  rgAbrir('datos');
+  rgDatosAbrir(p);
+}
+
 window.addEventListener('kiry-sesion', e => {
   perfil = e.detail.perfil;
   pintarSesion();
   if (e.detail.usuario) {
     aplicarPerfil();
     if (regOverlay.classList.contains('abierto') && !rgOcupado) rgCerrar();
+    setTimeout(revisarGooglePendiente, 300);
   } else {
     $('mcNombreCliente').value = '';
     $('mcDireccion').value = '';
@@ -1725,28 +1769,22 @@ document.querySelectorAll('[data-google]').forEach(btn => btn.addEventListener('
   const errEl = rgActual === 'login' ? rgErrL : rgErr;
   errEl.classList.remove('show', 'ok');
   rgOcupado = true; btn.disabled = true;
+  rgLoader.classList.add('on');
   try {
     const p = await KiryAuth.google();
     rgOcupado = false; btn.disabled = false;
+    rgLoader.classList.remove('on');
     if (p) perfil = p;
     if (!p || !p.tel || !p.dir) {
-      /* A Google le falta celular y dirección: los pedimos una sola vez */
-      rgCerrar();
-      setTimeout(() => {
-        document.getElementById('btnAjustes').click();
-        setTimeout(() => {
-          abrirEdicionPerfil();
-          const m = $('ajMsgPerfil');
-          m.textContent = 'Solo falta tu celular y tu dirección para poder hacer pedidos.';
-          m.className = 'aj-msg ok';
-        }, 450);
-      }, 400);
+      /* A Google le falta celular y dirección: los pedimos aquí mismo */
+      rgDatosAbrir(p || {});
     } else {
       aplicarPerfil();
       rgExito(vista, ((p.nombre || '').split(' ')[0]) || 'amigo');
     }
   } catch (err) {
     rgOcupado = false; btn.disabled = false;
+    rgLoader.classList.remove('on');
     if (err && err.code === 'auth/operation-not-allowed') {
       rgFalla(vista, errEl, 'El acceso con Google todavía no está activado. Por ahora usa tu correo y contraseña.');
       return;
@@ -1785,6 +1823,31 @@ rgForm.addEventListener('submit', async e => {
     rgFalla(rgForm, rgErr, msgError(err));
   }
 });
+rgDatos.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (rgOcupado || !window.KiryAuth) return;
+  const nombre = $('rgDNombre').value.trim();
+  const tel = $('rgDTel').value.trim();
+  const dir = $('rgDDir').value.trim();
+  const err = $('rgDErr');
+  err.classList.remove('show', 'ok');
+  let msg = '';
+  if (nombre.length < 3) msg = 'Escribe tu nombre completo.';
+  else if (tel.replace(/\D/g, '').length < 7) msg = 'Escribe un número de celular válido.';
+  else if (dir.length < 5) msg = 'Escribe tu dirección de entrega.';
+  if (msg) { rgFalla(rgDatos, err, msg); return; }
+  const btn = rgDatos.querySelector('button[type=submit]');
+  rgOcupado = true; btn.disabled = true; btn.textContent = 'Guardando…';
+  try {
+    const p = await KiryAuth.actualizarPerfil({ nombre, tel, dir });
+    perfil = p; aplicarPerfil();
+    rgExito(rgDatos, nombre.split(' ')[0]);
+  } catch (e2) {
+    rgOcupado = false; btn.disabled = false; btn.textContent = 'Guardar y empezar';
+    rgFalla(rgDatos, err, 'No se pudieron guardar tus datos. Revisa tu internet e inténtalo otra vez.');
+  }
+});
+$('rgDSkip').addEventListener('click', () => { if (!rgOcupado) rgCerrar(); });
 rgLogin.addEventListener('submit', async e => {
   e.preventDefault();
   if (rgOcupado || !window.KiryAuth) return;
@@ -2169,6 +2232,7 @@ if (!FIREBASE_CONFIG.apiKey.startsWith("PEGA")) {
           } catch (e) {
             const code = e && e.code;
             if (code === "auth/popup-blocked" || code === "auth/operation-not-supported-in-this-environment") {
+              try { localStorage.setItem("kiry_google_pend", "1"); } catch (e2) {}
               await signInWithRedirect(auth, prov);
               return estado.perfil;
             }
